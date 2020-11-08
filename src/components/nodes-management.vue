@@ -1,7 +1,7 @@
 <template>
   <base-table
-    :data="data"
-    :columns="columns">
+    :data="tableData"
+    :columns="tableColumns">
   </base-table>
 </template>
 
@@ -12,8 +12,8 @@ name: "nodes-management",
   components: {BaseTable},
   data() {
     return {
-      data: [],
-      columns: []
+      tableData: [],
+      tableColumns: []
     }
   },
   props: {
