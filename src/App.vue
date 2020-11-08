@@ -1,10 +1,6 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <top-component></top-component>
   </div>
 </template>
 
@@ -22,3 +18,9 @@
     line-height: 1.4;
   }
 </style>
+<script>
+import TopComponent from "@/components/top-component";
+export default {
+  components: {TopComponent}
+}
+</script>
