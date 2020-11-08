@@ -2,6 +2,7 @@
   <b-table
       :data="data"
       :columns="columns"
+      @select="rowSelected"
       :selected.sync="selected"
       focusable>
   </b-table>
@@ -18,6 +19,11 @@ name: "base-table",
   props: {
     data: [],
     columns: []
+  },
+  methods: {
+    rowSelected() {
+      this.$emit("select", this.selected)
+    }
   }
 }
 </script>

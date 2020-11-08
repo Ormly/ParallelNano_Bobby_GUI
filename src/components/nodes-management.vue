@@ -1,7 +1,8 @@
 <template>
   <base-table
     :data="tableData"
-    :columns="tableColumns">
+    :columns="tableColumns"
+    @select="selectedTableData">
   </base-table>
 </template>
 
@@ -13,11 +14,9 @@ name: "nodes-management",
   data() {
     return {
       tableData: [],
-      tableColumns: []
+      tableColumns: [],
+      selectedTableData: {}
     }
-  },
-  props: {
-
   }
 }
 </script>
