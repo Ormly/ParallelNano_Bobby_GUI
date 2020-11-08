@@ -1,6 +1,7 @@
 <template>
   <b-button
       @click="clicked"
+      type="type"
       icon-left="icon"
       size="size">
     {{ label }}
@@ -13,7 +14,8 @@ name: "base-button",
   props: {
     label: String,
     icon: String,
-    size: String
+    size: String,
+    type: String
   },
   methods: {
     clicked() {
