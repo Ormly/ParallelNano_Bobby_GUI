@@ -9,7 +9,6 @@
               :size="buttonColumnLeft[0].size"
               :type="buttonColumnLeft[0].type">
           </base-button>
-          <br/>
           <base-button
               :label="buttonColumnLeft[1].label"
               :icon="buttonColumnLeft[1].icon"
@@ -23,7 +22,6 @@
               :size="buttonColumnCenter[0].size"
               :type="buttonColumnCenter[0].type">
           </base-button>
-          <br/>
           <base-button
               :label="buttonColumnCenter[1].label"
               :icon="buttonColumnCenter[1].icon"
@@ -38,7 +36,6 @@
               :size="buttonColumnRight[0].size"
               :type="buttonColumnRight[0].type">
           </base-button>
-          <br/>
           <base-button
               :label="buttonColumnRight[1].label"
               :icon="buttonColumnRight[1].icon"

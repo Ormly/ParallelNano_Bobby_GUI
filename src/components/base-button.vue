@@ -3,7 +3,8 @@
       @click="clicked"
       type="type"
       icon-left="icon"
-      size="size">
+      size="size"
+      class="is-fullwidth">
     {{ label }}
   </b-button>
 </template>
