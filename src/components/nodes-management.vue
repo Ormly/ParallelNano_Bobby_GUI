@@ -1,16 +1,22 @@
 <template>
-  <base-table
-    :data="tableData"
-    :columns="tableColumns"
-    @select="storeSelectedData">
-  </base-table>
+  <div class="nodes-management">
+    <base-table
+      :data="tableData"
+      :columns="tableColumns"
+      @select="storeSelectedData">
+    </base-table>
+    <button-container
+      :button-data="buttonData">
+    </button-container>
+  </div>
 </template>
 
 <script>
 import BaseTable from "@/components/base-table";
+import ButtonContainer from "@/components/button-container";
 export default {
 name: "nodes-management",
-  components: {BaseTable},
+  components: {ButtonContainer, BaseTable},
   data() {
     return {
       tableData: [
@@ -45,7 +51,15 @@ name: "nodes-management",
           label: 'Gender',
         }
       ],
-      selectedTableData: {}
+      selectedTableData: {},
+      buttonData: [
+        {'label':'Details', 'icon':'', 'size':'is-normal', 'type':'is-primary'},
+        {'label':'Add New', 'icon':'', 'size':'is-normal', 'type':'is-primary'},
+        {'label':'Remove', 'icon':'', 'size':'is-normal', 'type':'is-primary'},
+        {'label':'Power Down', 'icon':'', 'size':'is-normal', 'type':'is-primary'},
+        {'label':'Power Up', 'icon':'', 'size':'is-normal', 'type':'is-primary'},
+        {'label':'Reboot', 'icon':'', 'size':'is-normal', 'type':'is-primary'}
+      ]
     }
   },
   methods: {
