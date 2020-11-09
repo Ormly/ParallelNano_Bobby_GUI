@@ -17,8 +17,8 @@ name: "base-table",
     }
   },
   props: {
-    data: [],
-    columns: []
+    data: Array,
+    columns: Array
   },
   methods: {
     rowSelected() {
