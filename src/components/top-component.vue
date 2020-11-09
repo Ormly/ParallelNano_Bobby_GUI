@@ -1,5 +1,12 @@
 <template>
-  <nodes-management></nodes-management>
+  <div class="columns">
+    <div class="column">
+      <h1 class="is-size-1">Nodes</h1>
+      <nodes-management class="column"/>
+    </div>
+    <div class="column">test</div>
+    <div class="column">test</div>
+  </div>
 </template>
 
 <script>

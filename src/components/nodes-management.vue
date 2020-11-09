@@ -5,6 +5,7 @@
       :columns="tableColumns"
       @select="storeSelectedData">
     </base-table>
+    <br/>
     <button-container
       :button-data="buttonData">
     </button-container>
