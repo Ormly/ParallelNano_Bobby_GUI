@@ -21,7 +21,7 @@ name: "base-button",
   },
   methods: {
     clicked() {
-      this.$emit("clicked")
+      this.$emit("base-button-clicked", this.label)
     }
   }
 }
