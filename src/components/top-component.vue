@@ -14,7 +14,7 @@
 
 <script>
 import NodesManagement from "@/components/nodes-management";
-import UsersManagement from "@/components/user-management";
+import UsersManagement from "@/components/users-management";
 export default {
 name: "top-component",
   components: {NodesManagement, UsersManagement}

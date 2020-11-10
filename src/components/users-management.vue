@@ -1,5 +1,5 @@
 <template>
-    <div class="nodes-management">
+    <div class="users-management">
         <base-table
             :data="tableData"
             :columns="tableColumns"
@@ -17,7 +17,7 @@ import UsersButtonContainer from "@/components/users-button-container";
 import BaseTable from "@/components/base-table";
 
 export default {
-    name: "user-management",
+    name: "users-management",
     components: {UsersButtonContainer, BaseTable},
     data()
     {
