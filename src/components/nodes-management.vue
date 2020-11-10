@@ -54,12 +54,12 @@ name: "nodes-management",
       ],
       selectedTableData: {},
       buttonData: [
-        {'label':'Details', 'icon':'', 'size':'is-normal', 'type':'is-primary'},
-        {'label':'Add New', 'icon':'', 'size':'is-normal', 'type':'is-primary'},
-        {'label':'Remove', 'icon':'', 'size':'is-normal', 'type':'is-primary'},
-        {'label':'Power Down', 'icon':'', 'size':'is-normal', 'type':'is-primary'},
-        {'label':'Power Up', 'icon':'', 'size':'is-normal', 'type':'is-primary'},
-        {'label':'Reboot', 'icon':'', 'size':'is-normal', 'type':'is-primary'}
+        {'label':'Details', 'icon':'', 'size':'is-normal', 'type':'is-primary', 'fullwidth':'is-fullwidth'},
+        {'label':'Add New', 'icon':'', 'size':'is-normal', 'type':'is-primary', 'fullwidth':'is-fullwidth'},
+        {'label':'Remove', 'icon':'', 'size':'is-normal', 'type':'is-primary', 'fullwidth':'is-fullwidth'},
+        {'label':'Power Down', 'icon':'', 'size':'is-normal', 'type':'is-primary', 'fullwidth':'is-fullwidth'},
+        {'label':'Power Up', 'icon':'', 'size':'is-normal', 'type':'is-primary', 'fullwidth':'is-fullwidth'},
+        {'label':'Reboot', 'icon':'', 'size':'is-normal', 'type':'is-primary', 'fullwidth':'is-fullwidth'}
       ]
     }
   },

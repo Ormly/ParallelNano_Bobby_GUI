@@ -4,7 +4,8 @@
              :label="dataItem.label"
              :icon="dataItem.icon"
              :size="dataItem.size"
-             :type="dataItem.type">
+             :type="dataItem.type"
+             :fullwidth="dataItem.fullwidth">
         </base-button>
     </div>
 </template>

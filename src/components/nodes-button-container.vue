@@ -7,7 +7,8 @@
             :label="dataItem.label"
             :icon="dataItem.icon"
             :size="dataItem.size"
-            :type="dataItem.type">
+            :type="dataItem.type"
+            :fullwidth="dataItem.fullwidth">
           </base-button>
         </div>
         <div class="column is-narrow">
@@ -15,7 +16,8 @@
             :label="dataItem.label"
             :icon="dataItem.icon"
             :size="dataItem.size"
-            :type="dataItem.type">
+            :type="dataItem.type"
+            :fullwidth="dataItem.fullwidth">
           </base-button>
         </div>
         <div class="column is-narrow">
@@ -23,7 +25,8 @@
              :label="dataItem.label"
              :icon="dataItem.icon"
              :size="dataItem.size"
-             :type="dataItem.type">
+             :type="dataItem.type"
+             :fullwidth="dataItem.fullwidth">
             </base-button>
         </div>
       </div>
@@ -34,7 +37,7 @@
 <script>
 import BaseButton from "@/components/base-button";
 export default {
-name: "button-container",
+name: "nodes-button-container",
   components: {BaseButton},
   props: {
     buttonData: Array

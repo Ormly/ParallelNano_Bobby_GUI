@@ -4,7 +4,7 @@
       type="type"
       icon-left="icon"
       size="size"
-      class="is-fullwidth">
+      :class=fullwidth>
     {{ label }}
   </b-button>
 </template>
@@ -16,7 +16,8 @@ name: "base-button",
     label: String,
     icon: String,
     size: String,
-    type: String
+    type: String,
+    fullwidth: String
   },
   methods: {
     clicked() {
