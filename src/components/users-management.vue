@@ -42,8 +42,8 @@ export default {
             ],
             selectedTableData: {},
             buttonData: [
-                {'label': 'Add New', 'icon': '', 'size': 'is-normal', 'type': 'is-primary', 'fullwidth':''},
-                {'label': 'Remove', 'icon': '', 'size': 'is-normal', 'type': 'is-primary', 'fullwidth':''}
+                {'label': 'Add New', 'icon': 'plus-thick', 'size': 'is-normal', 'type': 'is-primary', 'fullwidth':''},
+                {'label': 'Remove', 'icon': 'delete-forever', 'size': 'is-normal', 'type': 'is-primary', 'fullwidth':''}
             ]
         }
     },

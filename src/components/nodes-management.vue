@@ -45,12 +45,12 @@ name: "nodes-management",
       ],
       selectedTableData: {},
       buttonData: [
-        {'label':'Details', 'icon':'user-supervisor-circle', 'size':'is-normal', 'type':'is-primary', 'fullwidth':'is-fullwidth'},
-        {'label':'Add New', 'icon':'person-supervisor-circle', 'size':'is-normal', 'type':'is-primary', 'fullwidth':'is-fullwidth'},
-        {'label':'Remove', 'icon':'mdiAccountSupervisorCircle', 'size':'is-normal', 'type':'is-primary', 'fullwidth':'is-fullwidth'},
-        {'label':'Power Down', 'icon':'', 'size':'is-normal', 'type':'is-primary', 'fullwidth':'is-fullwidth'},
-        {'label':'Power Up', 'icon':'', 'size':'is-normal', 'type':'is-primary', 'fullwidth':'is-fullwidth'},
-        {'label':'Reboot', 'icon':'', 'size':'is-normal', 'type':'is-primary', 'fullwidth':'is-fullwidth'}
+        {'label':'Details', 'icon':'help-circle', 'size':'is-normal', 'type':'is-primary', 'fullwidth':'is-fullwidth'},
+        {'label':'Add New', 'icon':'plus-thick', 'size':'is-normal', 'type':'is-primary', 'fullwidth':'is-fullwidth'},
+        {'label':'Remove', 'icon':'delete-forever', 'size':'is-normal', 'type':'is-primary', 'fullwidth':'is-fullwidth'},
+        {'label':'Power Down', 'icon':'power-plug-off', 'size':'is-normal', 'type':'is-primary', 'fullwidth':'is-fullwidth'},
+        {'label':'Power Up', 'icon':'power-plug', 'size':'is-normal', 'type':'is-primary', 'fullwidth':'is-fullwidth'},
+        {'label':'Reboot', 'icon':'autorenew', 'size':'is-normal', 'type':'is-primary', 'fullwidth':'is-fullwidth'}
       ]
     }
   },

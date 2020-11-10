@@ -1,10 +1,10 @@
 <template>
   <b-button
       @click="clicked"
-      type="type"
-      icon-left="icon"
-      size="size"
-      :class=fullwidth>
+      :type="type"
+      :icon-left="icon"
+      :size="size"
+      :class=fullwidth outlined>
     {{ label }}
   </b-button>
 </template>
