@@ -15,7 +15,7 @@ name: "base-table",
   data() {
     return {
       selected: {},
-      narrowed: "isNarrowed"
+      narrowed: true
     }
   },
   props: {
