@@ -14,7 +14,7 @@
 
 <script>
 import BaseTable from "@/components/base-table";
-import ButtonContainer from "@/components/button-container";
+import ButtonContainer from "@/components/nodes-button-container";
 export default {
 name: "nodes-management",
   components: {ButtonContainer, BaseTable},
