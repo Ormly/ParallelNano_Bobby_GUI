@@ -1,13 +1,25 @@
 <template>
-
+    <div class="buttons has-addons">
+        <base-button v-for="dataItem in buttonData" :key="dataItem.label"
+             :label="dataItem.label"
+             :icon="dataItem.icon"
+             :size="dataItem.size"
+             :type="dataItem.type">
+        </base-button>
+    </div>
 </template>
 
 <script>
+import BaseButton from "@/components/base-button";
+
 export default {
-name: "users-button-container"
+name: "users-button-container",
+    components: {BaseButton},
+    props: {
+        buttonData: Array
+    }
 }
 </script>
 
 <style scoped>
-
 </style>

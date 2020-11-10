@@ -6,18 +6,18 @@
       @select="storeSelectedData">
     </base-table>
     <br/>
-    <button-container
+    <nodes-button-container
       :button-data="buttonData">
-    </button-container>
+    </nodes-button-container>
   </div>
 </template>
 
 <script>
 import BaseTable from "@/components/base-table";
-import ButtonContainer from "@/components/nodes-button-container";
+import NodesButtonContainer from "@/components/nodes-button-container";
 export default {
 name: "nodes-management",
-  components: {ButtonContainer, BaseTable},
+  components: {NodesButtonContainer, BaseTable},
   data() {
     return {
       tableData: [
