@@ -4,6 +4,7 @@
       :columns="columns"
       @select="rowSelected"
       :selected.sync="selected"
+      :narrowed="narrowed"
       focusable>
   </b-table>
 </template>
@@ -13,7 +14,8 @@ export default {
 name: "base-table",
   data() {
     return {
-      selected: {}
+      selected: {},
+      narrowed: "isNarrowed"
     }
   },
   props: {
