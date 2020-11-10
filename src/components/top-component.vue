@@ -8,16 +8,20 @@
         <h1 class="is-size-1">Users</h1>
         <users-management class="column"/>
     </div>
-    <div class="column">test</div>
+    <div class="column">
+        <h1 class="is-size-1">Environment</h1>
+        <data-management class="column"></data-management>
+    </div>
   </div>
 </template>
 
 <script>
 import NodesManagement from "@/components/nodes-management";
 import UsersManagement from "@/components/users-management";
+import DataManagement from "@/components/data-management";
 export default {
 name: "top-component",
-  components: {NodesManagement, UsersManagement}
+  components: {DataManagement, NodesManagement, UsersManagement}
 }
 </script>
 

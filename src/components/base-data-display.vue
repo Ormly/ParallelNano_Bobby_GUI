@@ -2,8 +2,8 @@
     <div class="container">
         <div class="box">
             <b-icon
-                :icon="icon-name"
-                :size="icon-size">
+                :icon="iconName"
+                :size="iconSize">
             </b-icon>
         </div>
     </div>
@@ -13,12 +13,8 @@
 export default {
 name: "base-data-display",
     props: {
-        'icon-name': String,
-        'icon-size': String,
-        'current-value': Number
-    },
-    methods: {
-
+        iconName: String,
+        iconSize: String
     }
 }
 </script>
