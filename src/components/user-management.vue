@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import UsersButtonContainer from "@/components/nodes-button-container";
+import UsersButtonContainer from "@/components/users-button-container";
 import BaseTable from "@/components/base-table";
 
 export default {
