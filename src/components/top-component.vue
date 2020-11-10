@@ -6,7 +6,7 @@
     </div>
     <div class="column">test</div>
     <div class="column">
-        <h1 class="is-size-1">Nodes</h1>
+        <h1 class="is-size-1">Users</h1>
         <users-management class="column"/>
     </div>
   </div>
