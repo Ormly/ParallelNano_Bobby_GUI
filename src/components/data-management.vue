@@ -1,16 +1,18 @@
 <template>
-    <div>
-        <base-data-display
-            :icon-name="temperatureIcon.icon"
-            :icon-size="temperatureIcon.size"
-            :current-data-state="temperatureData">
-        </base-data-display>
-        <br/>
-        <base-data-display
-            :icon-name="humidityIcon.icon"
-            :icon-size="humidityIcon.size"
-            :current-data-state="humidityData">
-        </base-data-display>
+    <div class="columns">
+        <div class="column is-two-thirds">
+            <base-data-display
+                :icon-name="temperatureIcon.icon"
+                :icon-size="temperatureIcon.size"
+                :current-data-state="temperatureData">
+            </base-data-display>
+            <br/>
+            <base-data-display
+                :icon-name="humidityIcon.icon"
+                :icon-size="humidityIcon.size"
+                :current-data-state="humidityData">
+            </base-data-display>
+        </div>
     </div>
 </template>
 

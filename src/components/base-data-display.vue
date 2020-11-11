@@ -8,7 +8,7 @@
                             :icon="iconName"
                             :size="iconSize">
                         </b-icon>
-                        <strong>{{currentDataState}}</strong>
+                        <h1 class="is-size-2">{{currentDataState}}</h1>
                     </div>
                 </div>
             </div>
