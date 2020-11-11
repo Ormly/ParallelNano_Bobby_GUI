@@ -9,15 +9,24 @@
     <nodes-button-container
       :button-data="buttonData">
     </nodes-button-container>
+    <br/>
+    <nodes-details-view
+        host-name="Johnny_05"
+        cpu-type="x86_64"
+        cpu-usage="3.7"
+        ip-address="10.0.0.113"
+        memory-usage="8.5554"
+        platform="Linux-5.4.0-48-generic-x86_x64-with-glibc2.29"></nodes-details-view>
   </div>
 </template>
 
 <script>
 import BaseTable from "@/components/base-table";
 import NodesButtonContainer from "@/components/nodes-button-container";
+import NodesDetailsView from "@/components/nodes-details-view";
 export default {
 name: "nodes-management",
-  components: {NodesButtonContainer, BaseTable},
+  components: {NodesDetailsView, NodesButtonContainer, BaseTable},
   data() {
     return {
       tableData: [
