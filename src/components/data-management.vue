@@ -1,14 +1,17 @@
 <template>
     <div>
         <base-data-display
-            :icon-name="temperatureData.icon"
-            :icon-size="temperatureData.size">
+            :icon-name="temperatureIcon.icon"
+            :icon-size="temperatureIcon.size"
+            :current-data-state="temperatureData">
         </base-data-display>
         <br/>
         <base-data-display
-            :icon-name="humidityData.icon"
-            :icon-size="humidityData.size">
-        </base-data-display></div>
+            :icon-name="humidityIcon.icon"
+            :icon-size="humidityIcon.size"
+            :current-data-state="humidityData">
+        </base-data-display>
+    </div>
 </template>
 
 <script>
@@ -18,15 +21,19 @@ name: "data-management",
     components: {BaseDataDisplay},
     data() {
         return {
-            temperatureData: {
+            temperatureIcon: {
                 'icon': 'thermometer',
                 'size': 'is-large'
             },
-            humidityData: {
+            humidityIcon: {
                 'icon': 'water-percent',
                 'size': 'is-large'
-            }
+            },
         }
+    },
+    props: {
+        temperatureData: String,
+        humidityData: String
     }
 }
 </script>
