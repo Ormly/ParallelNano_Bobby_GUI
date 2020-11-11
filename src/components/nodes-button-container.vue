@@ -3,7 +3,7 @@
     <div  class="column is-one-fifth">
       <div class="columns is-gapless">
         <div class="column is-narrow">
-          <base-button v-for="dataItem in buttonColumnLeft" :key="dataItem.label"
+          <base-button @base-button-clicked="propagateButtonEvent" v-for="dataItem in buttonColumnLeft" :key="dataItem.label"
             :label="dataItem.label"
             :icon="dataItem.icon"
             :size="dataItem.size"
@@ -51,6 +51,11 @@ name: "nodes-button-container",
     },
     buttonColumnRight() {
       return [this.buttonData[2],this.buttonData[5]]
+    }
+  },
+  methods: {
+    propagateButtonEvent(buttonLabel) {
+        this.$emit("button-clicked", buttonLabel);
     }
   }
 }

@@ -1,6 +1,6 @@
 <template>
     <div class="box">
-        <h1 class="is-size-2"><strong>Details</strong></h1>
+        <h1 class="is-size-2">Details</h1>
         <br/>
         <p><strong>Hostname: </strong>{{hostName}}</p>
         <br/>

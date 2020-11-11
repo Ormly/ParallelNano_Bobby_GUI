@@ -7,16 +7,18 @@
     </base-table>
     <br/>
     <nodes-button-container
-      :button-data="buttonData">
+      :button-data="buttonData"
+      @button-clicked="evaluateButtonEvent">
     </nodes-button-container>
     <br/>
-    <nodes-details-view
+    <nodes-details-view v-if="showDetails"
         host-name="Johnny_05"
         cpu-type="x86_64"
         cpu-usage="3.7"
         ip-address="10.0.0.113"
         memory-usage="8.5554"
-        platform="Linux-5.4.0-48-generic-x86_x64-with-glibc2.29"></nodes-details-view>
+        platform="Linux-5.4.0-48-generic-x86_x64-with-glibc2.29">
+    </nodes-details-view>
   </div>
 </template>
 
@@ -60,12 +62,23 @@ name: "nodes-management",
         {'label':'Power Down', 'icon':'power-plug-off', 'size':'is-normal', 'type':'is-primary', 'fullwidth':'is-fullwidth'},
         {'label':'Power Up', 'icon':'power-plug', 'size':'is-normal', 'type':'is-primary', 'fullwidth':'is-fullwidth'},
         {'label':'Reboot', 'icon':'autorenew', 'size':'is-normal', 'type':'is-primary', 'fullwidth':'is-fullwidth'}
-      ]
+      ],
+      showDetails: false
     }
   },
   methods: {
     storeSelectedData(selectedData) {
       this.selectedTableData = selectedData
+    },
+    evaluateButtonEvent(buttonLabel) {
+        switch(buttonLabel) {
+            case 'Details':
+                this.toggleDetailsView();
+                break;
+        }
+    },
+    toggleDetailsView() {
+        this.showDetails = !(this.showDetails);
     }
   }
 }
