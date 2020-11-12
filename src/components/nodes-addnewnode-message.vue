@@ -1,17 +1,23 @@
 <template>
-  <b-message title="Add new Node" type="is-info" size="is-large">
-    <b-field label="Choose One">
-      <b-select placeholder="Address type" @input="toggleAddressType" required>
-        <option value="node-name">Node Name</option>
-        <option value="node-ip">Node IP Address</option>
-      </b-select>
-    </b-field>
-    <b-field>
-      <b-input placeholder="Node Name"></b-input>
-    </b-field>
+  <b-message title="Add new Node" size="is-large">
+      <div class="block">
+          <b-radio v-model="radio"
+                   native-value="Node Name">
+              Node Name
+          </b-radio>
+          <b-radio v-model="radio"
+                   native-value="IP Address">
+              IP Address
+          </b-radio>
+      </div>
     <br/>
-    <b-field label="Name">
-      <b-input placeholder="Node IP address"></b-input>
+    <b-field>
+      <b-input size="is-medium" placeholder="Node Name" v-model="inputData"></b-input>
+      <p class="control">
+          <b-button size="is-medium" class="button" @click="submitData" is-primary>
+              Submit
+          </b-button>
+      </p>
     </b-field>
   </b-message>
 </template>
@@ -21,12 +27,20 @@ export default {
 name: "nodes-addnewnode-message",
   data() {
     return {
-      addressType: false
+      radio: String,
+      inputData: ''
     }
   },
   methods: {
-      toggleAddressType() {
-        this.addressType = !(this.addressType)
+      submitData() {
+          switch(this.radio) {
+              case 'Node Name':
+                  this.$emit("addNewNodeSubmittedName", this.inputData)
+                  break;
+              case 'IP Address':
+                  this.$emit("addNewNodeSubmittedIP", this.inputData)
+                  break;
+          }
       }
   }
 }

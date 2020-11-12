@@ -12,7 +12,7 @@
           </base-button>
         </div>
         <div class="column is-narrow">
-          <base-button v-for="dataItem in buttonColumnCenter" :key="dataItem.label"
+          <base-button @base-button-clicked="propagateButtonEvent" v-for="dataItem in buttonColumnCenter" :key="dataItem.label"
             :label="dataItem.label"
             :icon="dataItem.icon"
             :size="dataItem.size"
@@ -21,7 +21,7 @@
           </base-button>
         </div>
         <div class="column is-narrow">
-            <base-button v-for="dataItem in buttonColumnRight" :key="dataItem.label"
+            <base-button @base-button-clicked="propagateButtonEvent" v-for="dataItem in buttonColumnRight" :key="dataItem.label"
              :label="dataItem.label"
              :icon="dataItem.icon"
              :size="dataItem.size"
