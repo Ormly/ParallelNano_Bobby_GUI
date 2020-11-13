@@ -13,7 +13,6 @@
     <nodes-removenode-message v-if="showRemove"
         :node-to-remove="selectedTableData.node_name">
     </nodes-removenode-message>
-    <br/>
     <nodes-details-view v-if="showDetails"
         host-name="Johnny_05"
         cpu-type="x86_64"
@@ -73,9 +72,9 @@ name: "nodes-management",
       showDetails: false,
       showAddNew: false,
       showRemove: false,
-      powerUp: false,
-      powerDown: false,
-      reboot: false
+      showPowerUp: false,
+      showPowerDown: false,
+      showReboot: false
     }
   },
   methods: {
@@ -83,26 +82,51 @@ name: "nodes-management",
       this.selectedTableData = selectedData
     },
     evaluateButtonEvent(buttonLabel) {
-        switch(buttonLabel) {
+        this.closeActiveMessage();
+        this.activeMessage = buttonLabel;
+
+        switch(this.activeMessage) {
             case 'Details':
-                this.toggleDetailsView();
+                this.showDetails = true;
                 break;
             case 'Add New':
-                this.toggleAddNewMessage();
+                this.showAddNew = true;
                 break;
             case 'Remove':
-                this.toggleRemoveMessage()
+                this.showRemove = true;
+                break;
+            case 'Power Up':
+                this.showPowerUp = true;
+                break;
+            case 'Power Down':
+                this.showPowerDown = true;
+                break;
+            case 'Reboot':
+                this.showReboot = true;
                 break;
         }
     },
-    toggleDetailsView() {
-        this.showDetails = !(this.showDetails);
-    },
-    toggleAddNewMessage() {
-        this.showAddNew = !(this.showAddNew);
-    },
-    toggleRemoveMessage() {
-        this.showRemove = !(this.showRemove);
+    closeActiveMessage() {
+        switch(this.activeMessage) {
+            case 'Details':
+                this.showDetails = false;
+                break;
+            case 'Add New':
+                this.showAddNew = false;
+                break;
+            case 'Remove':
+                this.showRemove = false;
+                break;
+            case 'Power Up':
+                this.showPowerUp = false;
+                break;
+            case 'Power Down':
+                this.showPowerDown = false;
+                break;
+            case 'Reboot':
+                this.showReboot = false;
+                break;
+        }
     }
   }
 }
