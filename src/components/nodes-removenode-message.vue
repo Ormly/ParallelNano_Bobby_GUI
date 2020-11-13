@@ -1,5 +1,5 @@
 <template>
-    <b-message title="Remove Node" type="is-warning" size="is-large">
+    <b-message title="Remove Node" type="is-warning" size="is-large" @close="messageClosed">
         <h1 class="is-size-3">Are you sure you want to remove Node {{nodeToRemove}}</h1>
         <br/>
         <yes-no-button-container
@@ -19,6 +19,11 @@ name: "nodes-removenode-message",
                 {'label':'Confirm', 'size':'is-large', 'type':'is-success'},
                 {'label':'Cancel', 'size':'is-large', 'type':'is-danger'}
             ]
+        }
+    },
+    methods: {
+        messageClosed() {
+            this.$emit("removeClosed", "RemoveClosed");
         }
     },
     props: {

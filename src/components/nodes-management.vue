@@ -7,11 +7,13 @@
     </base-table>
       <nodes-button-container
         :button-data="buttonData"
-        @button-clicked="evaluateButtonEvent">
+        @button-clicked="evaluateButtonEvents">
       </nodes-button-container>
     <br/>
-    <nodes-removenode-message v-if="showRemove"
-        :node-to-remove="selectedTableData.node_name">
+    <nodes-removenode-message
+        v-if="showRemove"
+        :node-to-remove="selectedTableData.node_name"
+        @removeClosed="evaluateButtonEvents">
     </nodes-removenode-message>
     <nodes-details-view v-if="showDetails"
         host-name="Johnny_05"
@@ -21,7 +23,10 @@
         memory-usage="8.5554"
         platform="Linux-5.4.0-48-generic-x86_x64-with-glibc2.29">
     </nodes-details-view>
-    <nodes-addnewnode-message v-if="showAddNew"></nodes-addnewnode-message>
+    <nodes-addnewnode-message
+        v-if="showAddNew"
+        @addNewClosed="evaluateButtonEvents">
+    </nodes-addnewnode-message>
   </div>
 </template>
 
@@ -81,7 +86,7 @@ name: "nodes-management",
     storeSelectedData(selectedData) {
       this.selectedTableData = selectedData
     },
-    evaluateButtonEvent(buttonLabel) {
+    evaluateButtonEvents(buttonLabel) {
         this.closeActiveMessage();
         this.activeMessage = buttonLabel;
 
@@ -103,6 +108,12 @@ name: "nodes-management",
                 break;
             case 'Reboot':
                 this.showReboot = true;
+                break;
+            case 'AddNewClosed':
+                this.showAddNew = false;
+                break;
+            case 'RemoveClosed':
+                this.showRemove = false;
                 break;
         }
     },
