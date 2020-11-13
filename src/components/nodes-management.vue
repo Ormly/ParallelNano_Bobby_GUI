@@ -5,11 +5,14 @@
       :columns="tableColumns"
       @select="storeSelectedData">
     </base-table>
+      <nodes-button-container
+        :button-data="buttonData"
+        @button-clicked="evaluateButtonEvent">
+      </nodes-button-container>
     <br/>
-    <nodes-button-container
-      :button-data="buttonData"
-      @button-clicked="evaluateButtonEvent">
-    </nodes-button-container>
+    <nodes-removenode-message v-if="showRemove"
+        :node-to-remove="selectedTableData.node_name">
+    </nodes-removenode-message>
     <br/>
     <nodes-details-view v-if="showDetails"
         host-name="Johnny_05"
@@ -19,7 +22,7 @@
         memory-usage="8.5554"
         platform="Linux-5.4.0-48-generic-x86_x64-with-glibc2.29">
     </nodes-details-view>
-    <nodes-addnewnode-message v-else-if="showAddNew"></nodes-addnewnode-message>
+    <nodes-addnewnode-message v-if="showAddNew"></nodes-addnewnode-message>
   </div>
 </template>
 
@@ -28,9 +31,10 @@ import BaseTable from "@/components/base-table";
 import NodesButtonContainer from "@/components/nodes-button-container";
 import NodesDetailsView from "@/components/nodes-details-view";
 import NodesAddnewnodeMessage from "@/components/nodes-addnewnode-message";
+import NodesRemovenodeMessage from "@/components/nodes-removenode-message";
 export default {
 name: "nodes-management",
-  components: {NodesAddnewnodeMessage, NodesDetailsView, NodesButtonContainer, BaseTable},
+  components: {NodesRemovenodeMessage, NodesAddnewnodeMessage, NodesDetailsView, NodesButtonContainer, BaseTable},
   data() {
     return {
       tableData: [
@@ -65,8 +69,13 @@ name: "nodes-management",
         {'label':'Power Up', 'icon':'power-plug', 'size':'is-normal', 'type':'is-primary', 'fullwidth':'is-fullwidth'},
         {'label':'Reboot', 'icon':'autorenew', 'size':'is-normal', 'type':'is-primary', 'fullwidth':'is-fullwidth'}
       ],
+      activeMessage: String,
       showDetails: false,
-      showAddNew: false
+      showAddNew: false,
+      showRemove: false,
+      powerUp: false,
+      powerDown: false,
+      reboot: false
     }
   },
   methods: {
@@ -81,6 +90,9 @@ name: "nodes-management",
             case 'Add New':
                 this.toggleAddNewMessage();
                 break;
+            case 'Remove':
+                this.toggleRemoveMessage()
+                break;
         }
     },
     toggleDetailsView() {
@@ -88,6 +100,9 @@ name: "nodes-management",
     },
     toggleAddNewMessage() {
         this.showAddNew = !(this.showAddNew);
+    },
+    toggleRemoveMessage() {
+        this.showRemove = !(this.showRemove);
     }
   }
 }

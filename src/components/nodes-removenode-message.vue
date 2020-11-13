@@ -1,21 +1,26 @@
 <template>
     <b-message title="Remove Node" type="is-warning" size="is-large">
-        <h2 class="is-size-1">Are you sure you want to remove Node {{nodeToRemove}}</h2>
+        <h1 class="is-size-3">Are you sure you want to remove Node {{nodeToRemove}}</h1>
         <br/>
-        <b-field>
-            <b-input size="is-medium" placeholder="Node Name" v-model="inputData"></b-input>
-            <p class="control">
-                <b-button size="is-medium" class="button" @click="submitData" is-primary>
-                    Submit
-                </b-button>
-            </p>
-        </b-field>
+        <yes-no-button-container
+            :button-data="buttonData">
+        </yes-no-button-container>
     </b-message>
 </template>
 
 <script>
+import YesNoButtonContainer from "@/components/yes-no-button-container";
 export default {
 name: "nodes-removenode-message",
+    components: {YesNoButtonContainer},
+    data() {
+        return {
+            buttonData: [
+                {'label':'Confirm', 'size':'is-large', 'type':'is-success'},
+                {'label':'Cancel', 'size':'is-large', 'type':'is-danger'}
+            ]
+        }
+    },
     props: {
         nodeToRemove: String
     }
