@@ -2,14 +2,20 @@
   <b-message :title="messageTitle" size="is-large" @close="messageClosed">
     <div class="block">
       <b-radio v-model="radio"
-               native-value="Power Down immediately">
+               native-value="Power Down immediately"
+               @input="evaluatePowerDownRadio">
         Power Down immediately
       </b-radio>
       <br/>
       <b-radio v-model="radio"
-               native-value="Power Down in X Minutes">
+               native-value="Power Down in X Minutes"
+               @input="evaluatePowerDownRadio">
         Power Down in X Minutes
       </b-radio>
+    </div>
+    <div v-if="showInput" class="container">
+      <span class="columns"><b-input size="is-medium" v-model="inputData" class="column is-one-fifth"></b-input>
+      <span class="column">Minutes from now</span></span>
     </div>
     <br/>
     <yes-no-button-container
@@ -31,7 +37,11 @@ name: "nodes-powerdown-message",
         {'label':'Power Down', 'size':'is-large', 'type':'is-success'},
         {'label':'Cancel', 'size':'is-large', 'type':'is-danger'}
       ],
-      messageTitle: "Power Down " + this.nodeToPowerDown
+      messageTitle: "Power Down " + this.nodeToPowerDown,
+      radio: String,
+      inputData: '',
+      showInput: false,
+      minutesUntilPowerDown: Number
     }
   },
   methods: {
@@ -43,6 +53,16 @@ name: "nodes-powerdown-message",
         case('Power Down'):
         case('Cancel'):
           this.messageClosed();
+          break;
+      }
+    },
+    evaluatePowerDownRadio() {
+      switch(this.radio) {
+        case 'Power Down immediately':
+          this.showInput = false;
+          break;
+        case 'Power Down in X Minutes':
+          this.showInput = true;
           break;
       }
     }
