@@ -1,4 +1,4 @@
-import API from "@/components/lighthouse-connection/API";
+import API from "@/lighthouse-connection/API";
 
 const resource = "/compute_node_beacon";
 
