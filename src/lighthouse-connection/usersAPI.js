@@ -1,9 +1,14 @@
 import API from "@/lighthouse-connection/API";
 
-const resource = "";
+const userData = "/user_list";
+//const userDeletion = "/remove_user";
+//const userCreation = "/create_user";
 
 export default {
     getUsersData() {
-        return API.get(`${resource}`);
+        return API.get(`${userData}`);
+    },
+    deleteUser() {
+
     }
 };

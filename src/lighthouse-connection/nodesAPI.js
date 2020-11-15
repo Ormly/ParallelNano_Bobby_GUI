@@ -1,9 +1,9 @@
 import API from "@/lighthouse-connection/API";
 
-const resource = "/compute_node_beacon";
+const resource = "/nodes_status";
 
 export default {
-    getNodeData() {
+    getNodesData() {
         return API.get(`${resource}`);
-    }
+    },
 };

@@ -55,6 +55,7 @@ import NodesRemovenodeMessage from "@/components/nodes/messages/nodes-removenode
 import NodesPowerdownMessage from "@/components/nodes/messages/nodes-powerdown-message";
 import NodesPowerupMessage from "@/components/nodes/messages/nodes-powerup-message";
 import NodesRebootMessage from "@/components/nodes/messages/nodes-reboot-message";
+import nodesAPI from "@/lighthouse-connection/nodesAPI";
 export default {
 name: "nodes-management",
   components: {
@@ -62,8 +63,13 @@ name: "nodes-management",
     NodesPowerupMessage,
     NodesPowerdownMessage,
     NodesRemovenodeMessage, NodesAddnewnodeMessage, NodesDetailsView, NodesButtonContainer, BaseTable},
+  created() {
+    this.fetchNodesData()
+  },
   data() {
     return {
+      rawNodesData: {},
+      isLoading: false,
       tableData: [
         { 'node_name': 'Johnny_01', 'ip_address': '10.0.0.110', 'status': 'Up'},
         { 'node_name': 'Johnny_02', 'ip_address': '10.0.0.93', 'status': 'Up'},
@@ -74,18 +80,9 @@ name: "nodes-management",
         { 'node_name': 'Johnny_07', 'ip_address': '10.0.0.254', 'status': 'Down'}
       ],
       tableColumns: [
-        {
-          field: 'node_name',
-          label: 'Node',
-        },
-        {
-          field: 'ip_address',
-          label: 'IP address',
-        },
-        {
-          field: 'status',
-          label: 'Status',
-        }
+        { field: 'node_name', label: 'Node'},
+        { field: 'ip_address', label: 'IP address'},
+        { field: 'status', label: 'Status'}
       ],
       selectedTableData: {},
       buttonData: [
@@ -106,6 +103,12 @@ name: "nodes-management",
     }
   },
   methods: {
+    async fetchNodesData() {
+      this.isLoading = true
+      const { data } = await nodesAPI.getNodesData()
+      this.isLoading = false
+      this.rawNodesData = data
+    },
     storeSelectedData(selectedData) {
       this.selectedTableData = selectedData
     },
