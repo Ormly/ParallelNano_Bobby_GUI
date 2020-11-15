@@ -29,9 +29,11 @@ name: "data-management",
     components: {BaseDataDisplay},
     created() {
       this.fetchEnvironmentData()
+      this.pollAPI()
     },
-  data() {
+    data() {
         return {
+            polling: null,
             rawEnvironmentData: {},
             temperatureIcon: {
                 'icon': 'thermometer',
@@ -47,7 +49,15 @@ name: "data-management",
       async fetchEnvironmentData() {
         const { data } = await environmentAPI.getEnvironmentData()
         this.rawEnvironmentData = data
+      },
+      pollAPI () {
+        this.polling = setInterval(() => {
+          this.fetchEnvironmentData()
+        }, 3000)
       }
+    },
+    beforeDestroy() {
+        clearInterval(this.polling)
     }
 }
 </script>
