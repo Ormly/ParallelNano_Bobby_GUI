@@ -1,7 +1,11 @@
 <template>
     <div class="box">
-        <h1 class="is-size-2">Details</h1>
-        <br/>
+        <nav class="level">
+          <h1 class="is-size-2 level-left">
+            Details
+          </h1>
+          <a class="delete is-medium level-right" @click="viewClosed"></a>
+        </nav>
         <p><strong>Hostname: </strong>{{hostName}}</p>
         <br/>
         <p><strong>CPU Type: </strong>{{cpuType}}</p>
@@ -26,7 +30,12 @@ name: "nodes-details-view",
         ipAddress: String,
         memoryUsage: String,
         platform: String
+    },
+  methods: {
+    viewClosed() {
+      this.$emit("detailsClosed", "DetailsClosed");
     }
+  }
 }
 </script>
 

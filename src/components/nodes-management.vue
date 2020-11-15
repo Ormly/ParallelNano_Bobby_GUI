@@ -21,7 +21,8 @@
         cpu-usage="3.7"
         ip-address="10.0.0.113"
         memory-usage="8.5554"
-        platform="Linux-5.4.0-48-generic-x86_x64-with-glibc2.29">
+        platform="Linux-5.4.0-48-generic-x86_x64-with-glibc2.29"
+        @detailsClosed="evaluateButtonEvents">
     </nodes-details-view>
     <nodes-addnewnode-message
         v-if="showAddNew"
@@ -115,6 +116,9 @@ name: "nodes-management",
             case 'RemoveClosed':
                 this.showRemove = false;
                 break;
+            case 'DetailsClosed':
+              this.showDetails = false;
+              break;
         }
     },
     closeActiveMessage() {
