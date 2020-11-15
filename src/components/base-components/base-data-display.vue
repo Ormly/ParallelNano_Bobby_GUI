@@ -8,7 +8,7 @@
                             :icon="iconName"
                             :size="iconSize">
                         </b-icon>
-                        <h1 class="is-size-2">{{currentDataState}}</h1>
+                        <h1 class="is-size-2">{{display}}</h1>
                     </div>
                 </div>
             </div>
@@ -19,10 +19,24 @@
 <script>
 export default {
 name: "base-data-display",
-    props: {
+    mounted() {
+      this.setDisplay();
+    },
+    updated() {
+      this.setDisplay();
+    },
+  props: {
         iconName: String,
         iconSize: String,
-        currentDataState: String
+        currentDataState: Number,
+        dataType: String,
+        display: String
+    },
+    methods: {
+      setDisplay() {
+        let temp = '' + this.currentDataState;
+        this.dataType.localeCompare("humidity") ? this.display = temp + ' °C' : this.display = temp + ' %';
+      }
     }
 }
 </script>

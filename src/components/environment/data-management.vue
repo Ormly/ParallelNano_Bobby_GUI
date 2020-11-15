@@ -1,28 +1,38 @@
+<!--suppress ALL -->
 <template>
     <div class="columns">
         <div class="column is-two-thirds">
             <base-data-display
                 :icon-name="temperatureIcon.icon"
                 :icon-size="temperatureIcon.size"
-                :current-data-state="temperatureData">
+                data-type="temperature"
+                :current-data-state="rawEnvironmentData.temperature">
             </base-data-display>
             <br/>
             <base-data-display
                 :icon-name="humidityIcon.icon"
                 :icon-size="humidityIcon.size"
-                :current-data-state="humidityData">
+                data-type="humidity"
+                :current-data-state="rawEnvironmentData.humidity">
             </base-data-display>
         </div>
     </div>
 </template>
 
 <script>
+import {APIFactory} from "@/lighthouse-connection/APIFactory";
+const environmentAPI = APIFactory.get("environment");
+
 import BaseDataDisplay from "@/components/base-components/base-data-display";
 export default {
 name: "data-management",
     components: {BaseDataDisplay},
-    data() {
+    created() {
+      this.fetchEnvironmentData()
+    },
+  data() {
         return {
+            rawEnvironmentData: {},
             temperatureIcon: {
                 'icon': 'thermometer',
                 'size': 'is-large'
@@ -33,9 +43,11 @@ name: "data-management",
             },
         }
     },
-    props: {
-        temperatureData: String,
-        humidityData: String
+    methods: {
+      async fetchEnvironmentData() {
+        const { data } = await environmentAPI.getEnvironmentData()
+        this.rawEnvironmentData = data
+      }
     }
 }
 </script>

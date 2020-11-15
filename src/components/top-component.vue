@@ -10,10 +10,7 @@
     </div>
     <div class="column">
         <h1 class="is-size-1">Environment</h1>
-        <data-management
-            :humidity-data="humidityData"
-            :temperature-data="temperatureData"
-            class="column"></data-management>
+        <data-management class="column"></data-management>
     </div>
   </div>
 </template>
@@ -24,13 +21,7 @@ import UsersManagement from "@/components/users/users-management";
 import DataManagement from "@/components/environment/data-management";
 export default {
 name: "top-component",
-  components: {DataManagement, NodesManagement, UsersManagement},
-    data() {
-        return {
-            humidityData: "63%",
-            temperatureData: "45C°"
-        }
-    }
+  components: {DataManagement, NodesManagement, UsersManagement}
 }
 </script>
 
