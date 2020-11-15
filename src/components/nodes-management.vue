@@ -38,6 +38,11 @@
         :node-to-power-up="selectedTableData.node_name"
         @powerUpClosed="evaluateButtonEvents">
     </nodes-powerup-message>
+    <nodes-reboot-message
+        v-if="showReboot"
+        :node-to-reboot="selectedTableData.node_name"
+        @rebootClosed="evaluateButtonEvents">
+    </nodes-reboot-message>
   </div>
 </template>
 
@@ -49,9 +54,11 @@ import NodesAddnewnodeMessage from "@/components/nodes-addnewnode-message";
 import NodesRemovenodeMessage from "@/components/nodes-removenode-message";
 import NodesPowerdownMessage from "@/components/nodes-powerdown-message";
 import NodesPowerupMessage from "@/components/nodes-powerup-message";
+import NodesRebootMessage from "@/components/nodes-reboot-message";
 export default {
 name: "nodes-management",
   components: {
+    NodesRebootMessage,
     NodesPowerupMessage,
     NodesPowerdownMessage,
     NodesRemovenodeMessage, NodesAddnewnodeMessage, NodesDetailsView, NodesButtonContainer, BaseTable},
@@ -139,6 +146,9 @@ name: "nodes-management",
               break;
             case 'PowerUpClosed':
               this.showPowerUp = false;
+              break;
+            case 'RebootClosed':
+              this.showReboot = false;
               break;
         }
     },
