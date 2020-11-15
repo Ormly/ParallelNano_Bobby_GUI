@@ -25,17 +25,20 @@ name: "base-data-display",
     updated() {
       this.setDisplay();
     },
-  props: {
+    data() {
+      return {
+        display: String
+      }
+    },
+    props: {
         iconName: String,
         iconSize: String,
         currentDataState: Number,
-        dataType: String,
-        display: String
+        dataType: String
     },
     methods: {
       setDisplay() {
-        let temp = '' + this.currentDataState;
-        this.dataType.localeCompare("humidity") ? this.display = temp + ' °C' : this.display = temp + ' %';
+        this.dataType.localeCompare("humidity") ? this.display = this.currentDataState + ' °C' : this.display = this.currentDataState + ' %';
       }
     }
 }
