@@ -28,6 +28,11 @@
         v-if="showAddNew"
         @addNewClosed="evaluateButtonEvents">
     </nodes-addnewnode-message>
+    <nodes-powerdown-message
+        v-if="showPowerDown"
+        :node-to-power-down="selectedTableData.node_name"
+        @powerDownClosed="evaluateButtonEvents">
+    </nodes-powerdown-message>
   </div>
 </template>
 
@@ -37,9 +42,12 @@ import NodesButtonContainer from "@/components/nodes-button-container";
 import NodesDetailsView from "@/components/nodes-details-view";
 import NodesAddnewnodeMessage from "@/components/nodes-addnewnode-message";
 import NodesRemovenodeMessage from "@/components/nodes-removenode-message";
+import NodesPowerdownMessage from "@/components/nodes-powerdown-message";
 export default {
 name: "nodes-management",
-  components: {NodesRemovenodeMessage, NodesAddnewnodeMessage, NodesDetailsView, NodesButtonContainer, BaseTable},
+  components: {
+    NodesPowerdownMessage,
+    NodesRemovenodeMessage, NodesAddnewnodeMessage, NodesDetailsView, NodesButtonContainer, BaseTable},
   data() {
     return {
       tableData: [
@@ -119,6 +127,8 @@ name: "nodes-management",
             case 'DetailsClosed':
               this.showDetails = false;
               break;
+            case 'PowerDownClosed':
+              this.showPowerDown = false;
         }
     },
     closeActiveMessage() {
