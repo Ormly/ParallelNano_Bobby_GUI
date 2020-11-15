@@ -35,7 +35,8 @@
     </nodes-powerdown-message>
     <nodes-powerup-message
         v-if="showPowerUp"
-        :node-to-power-up="selectedTableData.node_name">
+        :node-to-power-up="selectedTableData.node_name"
+        @powerUpClosed="evaluateButtonEvents">
     </nodes-powerup-message>
   </div>
 </template>
@@ -136,7 +137,7 @@ name: "nodes-management",
             case 'PowerDownClosed':
               this.showPowerDown = false;
               break;
-            case 'PowerUpclosed':
+            case 'PowerUpClosed':
               this.showPowerUp = false;
               break;
         }
