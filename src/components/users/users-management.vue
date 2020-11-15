@@ -13,8 +13,8 @@
 </template>
 
 <script>
-import UsersButtonContainer from "@/components/users-button-container";
-import BaseTable from "@/components/base-table";
+import UsersButtonContainer from "@/components/users/users-button-container";
+import BaseTable from "@/components/base-components/base-table";
 
 export default {
     name: "users-management",

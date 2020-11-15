@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import BaseButton from "@/components/base-button";
+import BaseButton from "@/components/base-components/base-button";
 export default {
 name: "nodes-button-container",
   components: {BaseButton},

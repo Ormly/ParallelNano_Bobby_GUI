@@ -19,9 +19,9 @@
 </template>
 
 <script>
-import NodesManagement from "@/components/nodes-management";
-import UsersManagement from "@/components/users-management";
-import DataManagement from "@/components/data-management";
+import NodesManagement from "@/components/nodes/nodes-management";
+import UsersManagement from "@/components/users/users-management";
+import DataManagement from "@/components/environment/data-management";
 export default {
 name: "top-component",
   components: {DataManagement, NodesManagement, UsersManagement},

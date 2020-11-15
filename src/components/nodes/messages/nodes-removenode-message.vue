@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import YesNoButtonContainer from "@/components/yes-no-button-container";
+import YesNoButtonContainer from "@/components/base-components/base-yes-no-button-container";
 export default {
 name: "nodes-removenode-message",
     components: {YesNoButtonContainer},

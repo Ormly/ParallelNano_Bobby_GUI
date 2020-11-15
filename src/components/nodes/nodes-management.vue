@@ -47,14 +47,14 @@
 </template>
 
 <script>
-import BaseTable from "@/components/base-table";
-import NodesButtonContainer from "@/components/nodes-button-container";
-import NodesDetailsView from "@/components/nodes-details-view";
-import NodesAddnewnodeMessage from "@/components/nodes-addnewnode-message";
-import NodesRemovenodeMessage from "@/components/nodes-removenode-message";
-import NodesPowerdownMessage from "@/components/nodes-powerdown-message";
-import NodesPowerupMessage from "@/components/nodes-powerup-message";
-import NodesRebootMessage from "@/components/nodes-reboot-message";
+import BaseTable from "@/components/base-components/base-table";
+import NodesButtonContainer from "@/components/nodes/nodes-button-container";
+import NodesDetailsView from "@/components/nodes/nodes-details-view";
+import NodesAddnewnodeMessage from "@/components/nodes/messages/nodes-addnewnode-message";
+import NodesRemovenodeMessage from "@/components/nodes/messages/nodes-removenode-message";
+import NodesPowerdownMessage from "@/components/nodes/messages/nodes-powerdown-message";
+import NodesPowerupMessage from "@/components/nodes/messages/nodes-powerup-message";
+import NodesRebootMessage from "@/components/nodes/messages/nodes-reboot-message";
 export default {
 name: "nodes-management",
   components: {

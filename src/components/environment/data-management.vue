@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import BaseDataDisplay from "@/components/base-data-display";
+import BaseDataDisplay from "@/components/base-components/base-data-display";
 export default {
 name: "data-management",
     components: {BaseDataDisplay},
