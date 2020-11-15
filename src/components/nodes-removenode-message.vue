@@ -1,6 +1,6 @@
 <template>
     <b-message title="Remove Node" type="is-warning" size="is-large" @close="messageClosed">
-        <h1 class="is-size-3">Are you sure you want to remove Node {{nodeToRemove}}</h1>
+      <h1 class="is-size-3">Are you sure you want to remove Node <strong>{{nodeToRemove}}</strong> ?</h1>
         <br/>
         <yes-no-button-container
             :button-data="buttonData"

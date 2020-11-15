@@ -5,6 +5,7 @@
                native-value="Power Down immediately">
         Power Down immediately
       </b-radio>
+      <br/>
       <b-radio v-model="radio"
                native-value="Power Down in X Minutes">
         Power Down in X Minutes

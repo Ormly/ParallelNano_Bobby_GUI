@@ -1,18 +1,20 @@
 <template>
-  <b-message title="Add new Node" size="is-large" @close="messageClosed">
+  <b-message title="Add New Node" size="is-large" @close="messageClosed">
       <div class="block">
           <b-radio v-model="radio"
-                   native-value="Node Name">
+                   native-value="Node Name"
+                   @input="nameSelected">
               Node Name
           </b-radio>
+          <br/>
           <b-radio v-model="radio"
-                   native-value="IP Address">
+                   native-value="IP Address"
+                   @input="ipAddressSelected">
               IP Address
           </b-radio>
       </div>
-    <br/>
     <b-field>
-      <b-input size="is-medium" placeholder="Node Name" v-model="inputData"></b-input>
+      <b-input size="is-medium" :placeholder="selectedVariant" v-model="inputData"></b-input>
       <p class="control">
           <b-button size="is-medium" class="button" @click="submitData" is-primary>
               Submit
@@ -28,7 +30,8 @@ name: "nodes-addnewnode-message",
   data() {
     return {
       radio: String,
-      inputData: ''
+      inputData: '',
+      selectedVariant: ""
     }
   },
   methods: {
@@ -44,6 +47,12 @@ name: "nodes-addnewnode-message",
       },
       messageClosed() {
           this.$emit("addNewClosed", "AddNewClosed");
+      },
+      ipAddressSelected() {
+          this.selectedVariant = "Node IP Address";
+      },
+      nameSelected() {
+          this.selectedVariant = "Node Name";
       }
   }
 }
