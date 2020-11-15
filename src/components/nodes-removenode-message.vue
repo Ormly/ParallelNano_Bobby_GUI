@@ -3,7 +3,9 @@
         <h1 class="is-size-3">Are you sure you want to remove Node {{nodeToRemove}}</h1>
         <br/>
         <yes-no-button-container
-            :button-data="buttonData">
+            :button-data="buttonData"
+            :key="buttonData.label"
+            @button-clicked="evaluateButtonClick">
         </yes-no-button-container>
     </b-message>
 </template>
@@ -24,6 +26,14 @@ name: "nodes-removenode-message",
     methods: {
         messageClosed() {
             this.$emit("removeClosed", "RemoveClosed");
+        },
+        evaluateButtonClick(buttonLabel) {
+          switch(buttonLabel) {
+            case('Confirm'):
+            case('Cancel'):
+              this.messageClosed();
+              break;
+          }
         }
     },
     props: {

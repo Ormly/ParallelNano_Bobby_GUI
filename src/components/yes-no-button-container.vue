@@ -1,6 +1,8 @@
 <template>
     <div class="buttons">
-        <base-button v-for="dataItem in buttonData" :key="dataItem.label"
+        <base-button @base-button-clicked="propagateButtonEvent"
+                     v-for="dataItem in buttonData"
+                     :key="dataItem.label"
                      :label="dataItem.label"
                      :size="dataItem.size"
                      :type="dataItem.type">
