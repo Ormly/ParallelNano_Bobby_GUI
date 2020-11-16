@@ -29,7 +29,7 @@ name: "data-management",
     components: {BaseDataDisplay},
     created() {
       this.fetchEnvironmentData()
-      this.pollAPI()
+      //this.pollAPI()
     },
     data() {
         return {

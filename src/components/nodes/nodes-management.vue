@@ -67,7 +67,7 @@ name: "nodes-management",
     NodesRemovenodeMessage, NodesAddnewnodeMessage, NodesDetailsView, NodesButtonContainer, BaseTable},
   created() {
     this.fetchNodesData()
-    this.pollAPI()
+    //this.pollAPI()
     this.populateTable()
     //{ 'node_name': 'Johnny_06', 'ip_address': '10.0.0.209', 'status': 'Up'}
   },

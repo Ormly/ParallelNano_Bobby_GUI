@@ -1,6 +1,6 @@
 import API from "@/lighthouse-connection/API";
 
-const resource = "/nodes_status";
+const status = "/nodes_status";
 
 export default {
     data() {
@@ -9,6 +9,6 @@ export default {
         }
     },
     getNodesData() {
-        return API.get(`${resource}`).then(response => this.info = response.data);
+        return API.get(`${status}`).then(response => this.info = response.data);
     },
 };

@@ -11,7 +11,7 @@ export default {
         }
     },
     getUsersData() {
-        return API.get(`${userData}`).then(response => this.info = response.data);
+        return API.get(`${userData}`).then(response => this.info = response.data.response.users);
     },
     deleteUser() {
 
