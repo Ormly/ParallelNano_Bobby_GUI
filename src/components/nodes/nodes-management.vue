@@ -47,6 +47,9 @@
 </template>
 
 <script>
+import {APIFactory} from "@/lighthouse-connection/APIFactory";
+const nodesAPI = APIFactory.get("nodes");
+
 import BaseTable from "@/components/base-components/base-table";
 import NodesButtonContainer from "@/components/nodes/nodes-button-container";
 import NodesDetailsView from "@/components/nodes/nodes-details-view";
@@ -55,7 +58,6 @@ import NodesRemovenodeMessage from "@/components/nodes/messages/nodes-removenode
 import NodesPowerdownMessage from "@/components/nodes/messages/nodes-powerdown-message";
 import NodesPowerupMessage from "@/components/nodes/messages/nodes-powerup-message";
 import NodesRebootMessage from "@/components/nodes/messages/nodes-reboot-message";
-import nodesAPI from "@/lighthouse-connection/nodesAPI";
 export default {
 name: "nodes-management",
   components: {
@@ -65,20 +67,16 @@ name: "nodes-management",
     NodesRemovenodeMessage, NodesAddnewnodeMessage, NodesDetailsView, NodesButtonContainer, BaseTable},
   created() {
     this.fetchNodesData()
+    this.pollAPI()
+    this.populateTable()
+    //{ 'node_name': 'Johnny_06', 'ip_address': '10.0.0.209', 'status': 'Up'}
   },
   data() {
     return {
+      polling: null,
       rawNodesData: {},
       isLoading: false,
-      tableData: [
-        { 'node_name': 'Johnny_01', 'ip_address': '10.0.0.110', 'status': 'Up'},
-        { 'node_name': 'Johnny_02', 'ip_address': '10.0.0.93', 'status': 'Up'},
-        { 'node_name': 'Johnny_03', 'ip_address': '10.0.0.143', 'status': 'Up'},
-        { 'node_name': 'Johnny_04', 'ip_address': '10.0.0.117', 'status': 'Down'},
-        { 'node_name': 'Johnny_05', 'ip_address': '10.0.0.113', 'status': 'Up'},
-        { 'node_name': 'Johnny_06', 'ip_address': '10.0.0.209', 'status': 'Up'},
-        { 'node_name': 'Johnny_07', 'ip_address': '10.0.0.254', 'status': 'Down'}
-      ],
+      tableData: [],
       tableColumns: [
         { field: 'node_name', label: 'Node'},
         { field: 'ip_address', label: 'IP address'},
@@ -105,9 +103,27 @@ name: "nodes-management",
   methods: {
     async fetchNodesData() {
       this.isLoading = true
-      const { data } = await nodesAPI.getNodesData()
+      this.rawNodesData = await nodesAPI.getNodesData()
       this.isLoading = false
-      this.rawNodesData = data
+      this.populateTable()
+    },
+    pollAPI () {
+      this.polling = setInterval(() => {
+        this.fetchNodesData()
+      }, 10000)
+    },
+    populateTable() {
+      this.tableData = []
+      for(var index = 0; index < this.rawNodesData.length; index++) {
+        var raw = this.rawNodesData[index];
+        var entry = {
+            'node_name': raw.hostname,
+            'ip_address': raw.ip_address,
+            'status': 'up'
+        }
+
+        this.tableData.push(entry)
+      }
     },
     storeSelectedData(selectedData) {
       this.selectedTableData = selectedData
@@ -177,6 +193,9 @@ name: "nodes-management",
                 break;
         }
     }
+  },
+  beforeDestroy() {
+    clearInterval(this.polling)
   }
 }
 </script>

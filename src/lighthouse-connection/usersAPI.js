@@ -5,8 +5,13 @@ const userData = "/user_list";
 //const userCreation = "/create_user";
 
 export default {
+    data() {
+        return {
+            info: null
+        }
+    },
     getUsersData() {
-        return API.get(`${userData}`);
+        return API.get(`${userData}`).then(response => this.info = response.data);
     },
     deleteUser() {
 

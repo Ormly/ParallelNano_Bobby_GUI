@@ -5,14 +5,14 @@
             <base-data-display
                 :icon-name="temperatureIcon.icon"
                 :icon-size="temperatureIcon.size"
-                data-type="temperature"
+                parameter-sign="°C"
                 :current-data-state="rawEnvironmentData.temperature">
             </base-data-display>
             <br/>
             <base-data-display
                 :icon-name="humidityIcon.icon"
                 :icon-size="humidityIcon.size"
-                data-type="humidity"
+                parameter-sign="%"
                 :current-data-state="rawEnvironmentData.humidity">
             </base-data-display>
         </div>
@@ -34,6 +34,7 @@ name: "data-management",
     data() {
         return {
             polling: null,
+            isLoading: false,
             rawEnvironmentData: {},
             temperatureIcon: {
                 'icon': 'thermometer',
@@ -47,13 +48,14 @@ name: "data-management",
     },
     methods: {
       async fetchEnvironmentData() {
-        const { data } = await environmentAPI.getEnvironmentData()
-        this.rawEnvironmentData = data
+        this.isLoading = true
+        this.rawEnvironmentData = await environmentAPI.getEnvironmentData()
+        this.isLoading = false
       },
       pollAPI () {
         this.polling = setInterval(() => {
           this.fetchEnvironmentData()
-        }, 3000)
+        }, 10000)
       }
     },
     beforeDestroy() {
