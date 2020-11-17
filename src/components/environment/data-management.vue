@@ -23,7 +23,7 @@
 import {APIFactory} from "@/lighthouse-connection/APIFactory";
 const environmentAPI = APIFactory.get("environment");
 
-import BaseDataDisplay from "@/components/base-components/base-data-display";
+import BaseDataDisplay from "@/components/environment/data-display";
 export default {
 name: "data-management",
     components: {BaseDataDisplay},
