@@ -16,12 +16,13 @@
         @removeClosed="evaluateButtonEvents">
     </nodes-removenode-message>
     <nodes-details-view v-if="showDetails"
-        host-name="Johnny_05"
-        cpu-type="x86_64"
-        cpu-usage="3.7"
-        ip-address="10.0.0.113"
-        memory-usage="8.5554"
-        platform="Linux-5.4.0-48-generic-x86_x64-with-glibc2.29"
+        :host-name="hostName"
+        :cpu-type="cpuType"
+        :gpu-type="gpuType"
+        :cpu-usage="cpuUsage"
+        :ip-address="ipAddress"
+        :memory-usage="memoryUsage"
+        :platform="platform"
         @detailsClosed="evaluateButtonEvents">
     </nodes-details-view>
     <nodes-addnewnode-message
@@ -74,8 +75,9 @@ name: "nodes-management",
   data() {
     return {
       polling: null,
-      rawNodesData: {},
       isLoading: false,
+
+      rawNodesData: {},
       tableData: [],
       tableColumns: [
         { field: 'node_name', label: 'Node'},
@@ -83,6 +85,7 @@ name: "nodes-management",
         { field: 'status', label: 'Status'}
       ],
       selectedTableData: {},
+
       buttonData: [
         {'label':'Details', 'icon':'help-circle', 'size':'is-normal', 'type':'is-primary', 'fullwidth':'is-fullwidth'},
         {'label':'Add New', 'icon':'plus-thick', 'size':'is-normal', 'type':'is-primary', 'fullwidth':'is-fullwidth'},
@@ -91,6 +94,15 @@ name: "nodes-management",
         {'label':'Power Up', 'icon':'power-plug', 'size':'is-normal', 'type':'is-primary', 'fullwidth':'is-fullwidth'},
         {'label':'Reboot', 'icon':'autorenew', 'size':'is-normal', 'type':'is-primary', 'fullwidth':'is-fullwidth'}
       ],
+
+      hostName: '',
+      cpuType: '',
+      gpuType: '',
+      cpuUsage: '',
+      memoryUsage: '',
+      ipAddress: '',
+      platform: '',
+
       activeMessage: String,
       showDetails: false,
       showAddNew: false,
@@ -98,6 +110,11 @@ name: "nodes-management",
       showPowerUp: false,
       showPowerDown: false,
       showReboot: false
+    }
+  },
+  watch: {
+    selectedTableData: function() {
+      this.populateDetailsView();
     }
   },
   methods: {
@@ -121,8 +138,23 @@ name: "nodes-management",
             'ip_address': raw.ip_address,
             'status': 'up'
         }
-
         this.tableData.push(entry)
+      }
+    },
+    populateDetailsView() {
+      if (this.tableData && this.tableData.length) {
+        for(var indexOuter = 0; indexOuter < this.rawNodesData.length; indexOuter++) {
+            if(this.rawNodesData[indexOuter].hostname === this.selectedTableData.node_name) {
+              let temp = this.rawNodesData[indexOuter]
+              this.hostName = temp.hostname
+              this.cpuType = temp.cpu
+              this.gpuType = temp.gpu
+              this.cpuUsage = '' + temp.cpu_usage
+              this.memoryUsage = '' + temp.mem_usage
+              this.ipAddress = temp.ip_address
+              this.platform = temp.platform
+            }
+        }
       }
     },
     storeSelectedData(selectedData) {
@@ -134,7 +166,8 @@ name: "nodes-management",
 
         switch(this.activeMessage) {
             case 'Details':
-                this.showDetails = true;
+                if (!(this.hostName === ''))
+                  this.showDetails = true;
                 break;
             case 'Add New':
                 this.showAddNew = true;

@@ -10,6 +10,8 @@
         <br/>
         <p><strong>CPU Type: </strong>{{cpuType}}</p>
         <br/>
+        <p><strong>GPU Type: </strong>{{gpuType}}</p>
+        <br/>
         <p><strong>CPU Usage: </strong>{{cpuUsage}}</p>
         <br/>
         <p><strong>IP Address: </strong>{{ipAddress}}</p>
@@ -26,6 +28,7 @@ name: "nodes-details-view",
     props: {
         hostName: String,
         cpuType: String,
+        gpuType: String,
         cpuUsage: String,
         ipAddress: String,
         memoryUsage: String,
