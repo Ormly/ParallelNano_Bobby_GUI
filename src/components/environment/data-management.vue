@@ -41,7 +41,7 @@ const environmentAPI = APIFactory.get("environment");
 
 import DataDisplay from "@/components/environment/data-display";
 import BaseButton from "@/components/base-components/base-button";
-import DataThresholdMessage from "@/components/environment/data-threshold-message";
+import DataThresholdMessage from "@/components/environment/messages/data-threshold-message";
 export default {
 name: "data-management",
     components: {DataThresholdMessage, DataDisplay, BaseButton},
