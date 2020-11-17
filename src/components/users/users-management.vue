@@ -7,18 +7,18 @@
         </base-table>
         <users-button-container
             :button-data="buttonData"
-            @button-clicked="evaluateButtonEvents">
+            @button-clicked="evaluateEvents">
         </users-button-container>
         <br/>
         <users-removeuser-message
             v-if="showRemove"
             :user-to-remove="selectedTableData.user_name"
-            @removeClosed="evaluateButtonEvents">
+            @removeClosed="evaluateEvents">
         </users-removeuser-message>
         <users-adduser-message
             v-if="showAddNew"
-            @addNewClosed="evaluateButtonEvents"
-            @addNewUser="evaluateButtonEvents">
+            @addNewClosed="evaluateEvents"
+            @addNewUser="evaluateEvents">
         </users-adduser-message>
     </div>
 </template>
@@ -99,11 +99,11 @@ export default {
       setCurrentUserName() {
         this.currentUserName = this.selectedTableData.user_name
       },
-      evaluateButtonEvents(buttonLabel) {
+      evaluateEvents(payload) {
         this.closeActiveMessage();
-        this.activeMessage = buttonLabel;
+        this.activeMessage = payload;
 
-        switch(this.activeMessage) {
+        switch(payload) {
           case 'Add New':
             this.showAddNew = true;
             break;

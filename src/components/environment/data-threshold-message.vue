@@ -1,13 +1,15 @@
 <template>
-  <b-message title="Add New User" size="is-large" @close="messageClosed">
+  <b-message title="Change Environmental Thresholds" size="is-medium" @close="messageClosed">
     <div class="columns">
-      <div class="column is-two-thirds">
-        <b-field>
-          <b-input size="is-medium" placeholder="Username" maxlength="30" v-model="inputDataUsername"></b-input>
-        </b-field>
-        <b-field>
-          <b-input type="password" size="is-medium" placeholder="Password" maxlength="30" v-model="inputDataPassword" password-reveal></b-input>
-        </b-field>
+      <div class="column is-one-half">
+        <div>
+          <b-field label="Temperature">
+            <b-input maxlength="2" v-model="inputDataTemperature" style="width: 25%"></b-input>
+          </b-field>
+          <b-field label="Humidity">
+            <b-input maxlength="2" v-model="inputDataHumidity" style="width: 25%"></b-input>
+          </b-field>
+        </div>
       </div>
     </div>
     <yes-no-button-container
@@ -21,12 +23,12 @@
 <script>
 import YesNoButtonContainer from "@/components/base-components/base-yes-no-button-container";
 export default {
-name: "users-adduser-message",
+name: "data-threshold-message",
   components: {YesNoButtonContainer},
   data() {
     return {
-      inputDataUsername: '',
-      inputDataPassword: '',
+      inputDataTemperature: '',
+      inputDataHumidity: '',
       submissionData: [],
 
       buttonData: [
@@ -47,11 +49,11 @@ name: "users-adduser-message",
       }
     },
     submitData() {
-      this.submissionData.push(this.inputDataUsername, this.inputDataPassword)
-      this.$emit("addNewUser", this.submissionData);
+      this.submissionData.push(this.inputDataTemperature, this.inputDataHumidity)
+      this.$emit("settingsChanged", this.submissionData);
     },
     messageClosed() {
-      this.$emit("addNewClosed", "AddNewClosed");
+      this.$emit("settingsClosed", "SettingsClosed");
     }
   }
 }

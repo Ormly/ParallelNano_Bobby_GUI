@@ -18,7 +18,7 @@
 
 <script>
 export default {
-name: "base-data-display",
+name: "data-display",
     props: {
         iconName: String,
         iconSize: String,
