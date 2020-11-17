@@ -50,7 +50,7 @@ name: "nodes-button-container",
       return [this.buttonData[1],this.buttonData[4]]
     },
     buttonColumnRight() {
-      return [this.buttonData[2],this.buttonData[5]]
+      return [this.buttonData[2]]
     }
   },
   methods: {

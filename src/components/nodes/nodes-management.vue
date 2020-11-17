@@ -10,11 +10,6 @@
         @button-clicked="evaluateButtonEvents">
       </nodes-button-container>
     <br/>
-    <nodes-removenode-message
-        v-if="showRemove"
-        :node-to-remove="selectedTableData.node_name"
-        @removeClosed="evaluateButtonEvents">
-    </nodes-removenode-message>
     <nodes-details-view v-if="showDetails"
         :host-name="currentHostName"
         :cpu-type="currentCpuType"
@@ -55,7 +50,6 @@ import BaseTable from "@/components/base-components/base-table";
 import NodesButtonContainer from "@/components/nodes/nodes-button-container";
 import NodesDetailsView from "@/components/nodes/nodes-details-view";
 import NodesAddnewnodeMessage from "@/components/nodes/messages/nodes-addnewnode-message";
-import NodesRemovenodeMessage from "@/components/nodes/messages/nodes-removenode-message";
 import NodesPowerdownMessage from "@/components/nodes/messages/nodes-powerdown-message";
 import NodesPowerupMessage from "@/components/nodes/messages/nodes-powerup-message";
 import NodesRebootMessage from "@/components/nodes/messages/nodes-reboot-message";
@@ -64,8 +58,7 @@ name: "nodes-management",
   components: {
     NodesRebootMessage,
     NodesPowerupMessage,
-    NodesPowerdownMessage,
-    NodesRemovenodeMessage, NodesAddnewnodeMessage, NodesDetailsView, NodesButtonContainer, BaseTable},
+    NodesPowerdownMessage,NodesAddnewnodeMessage, NodesDetailsView, NodesButtonContainer, BaseTable},
   created() {
     this.fetchAvailableNodesData()
     this.fetchCurrentNodesData()
@@ -91,7 +84,6 @@ name: "nodes-management",
       buttonData: [
         {'label':'Details', 'icon':'help-circle', 'size':'is-normal', 'type':'is-primary', 'fullwidth':'is-fullwidth'},
         {'label':'Add New', 'icon':'plus-thick', 'size':'is-normal', 'type':'is-primary', 'fullwidth':'is-fullwidth'},
-        {'label':'Remove', 'icon':'delete-forever', 'size':'is-normal', 'type':'is-primary', 'fullwidth':'is-fullwidth'},
         {'label':'Power Down', 'icon':'power-plug-off', 'size':'is-normal', 'type':'is-primary', 'fullwidth':'is-fullwidth'},
         {'label':'Power Up', 'icon':'power-plug', 'size':'is-normal', 'type':'is-primary', 'fullwidth':'is-fullwidth'},
         {'label':'Reboot', 'icon':'autorenew', 'size':'is-normal', 'type':'is-primary', 'fullwidth':'is-fullwidth'}
@@ -108,7 +100,6 @@ name: "nodes-management",
       activeMessage: String,
       showDetails: false,
       showAddNew: false,
-      showRemove: false,
       showPowerUp: false,
       showPowerDown: false,
       showReboot: false
@@ -207,10 +198,6 @@ name: "nodes-management",
             case 'Add New':
                 this.showAddNew = true;
                 break;
-            case 'Remove':
-                if (!(this.currentHostName === ''))
-                this.showRemove = true;
-                break;
             case 'Power Up':
                 if (!(this.currentHostName === ''))
                 this.showPowerUp = true;
@@ -225,9 +212,6 @@ name: "nodes-management",
                 break;
             case 'AddNewClosed':
                 this.showAddNew = false;
-                break;
-            case 'RemoveClosed':
-                this.showRemove = false;
                 break;
             case 'DetailsClosed':
               this.showDetails = false;
@@ -250,9 +234,6 @@ name: "nodes-management",
                 break;
             case 'Add New':
                 this.showAddNew = false;
-                break;
-            case 'Remove':
-                this.showRemove = false;
                 break;
             case 'Power Up':
                 this.showPowerUp = false;
