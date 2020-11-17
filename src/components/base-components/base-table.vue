@@ -2,7 +2,6 @@
   <b-table
       :data="data"
       :columns="columns"
-      @select="rowSelected"
       :selected.sync="selected"
       :narrowed="narrowed"
       focusable>
@@ -14,8 +13,13 @@ export default {
 name: "base-table",
   data() {
     return {
-      selected: {},
+      selected: null,
       narrowed: true
+    }
+  },
+  watch: {
+    selected: function() {
+      this.rowSelected();
     }
   },
   props: {
