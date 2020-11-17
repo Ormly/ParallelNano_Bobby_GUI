@@ -170,25 +170,18 @@ name: "nodes-management",
     },
     checkNodeStatus() {
       for(let indexOuter = 0; indexOuter < this.availableNodesData.length; indexOuter++) {
-        let baseNodeName = this.availableNodesData[indexOuter].hostname
-        let nodeState = false;
+        let baseNode = this.availableNodesData[indexOuter].hostname
+        let liveness = false
         for(let indexInner = 0; indexInner < this.currentNodesData.length; indexInner++) {
-          let variableNodeName = this.currentNodesData[indexInner].hostname
-          if(baseNodeName === variableNodeName) {
-            this.tableData[indexInner].status = 'Up'
-            nodeState = true
+          let liveNode = this.currentNodesData[indexInner].hostname
+          if(baseNode === liveNode) {
+            this.tableData[indexOuter].status = 'Up'
+            liveness = true
             break;
           }
         }
-        if(!nodeState) {
-          for(let indexTable = 0; indexTable < this.tableData.length; indexTable++) {
-            let tableEntryName = this.tableData[indexTable].node_name
-            if(baseNodeName === tableEntryName) {
-              this.tableData[indexTable].status = 'Down'
-              break;
-            }
-          }
-        }
+        if(!liveness)
+          this.tableData[indexOuter].status = 'Down'
       }
     },
     evaluateButtonEvents(buttonLabel) {
