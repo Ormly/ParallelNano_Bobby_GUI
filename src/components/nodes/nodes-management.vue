@@ -173,15 +173,19 @@ name: "nodes-management",
                 this.showAddNew = true;
                 break;
             case 'Remove':
+                if (!(this.hostName === ''))
                 this.showRemove = true;
                 break;
             case 'Power Up':
+                if (!(this.hostName === ''))
                 this.showPowerUp = true;
                 break;
             case 'Power Down':
+                if (!(this.hostName === ''))
                 this.showPowerDown = true;
                 break;
             case 'Reboot':
+                if (!(this.hostName === ''))
                 this.showReboot = true;
                 break;
             case 'AddNewClosed':
