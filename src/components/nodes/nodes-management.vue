@@ -16,13 +16,13 @@
         @removeClosed="evaluateButtonEvents">
     </nodes-removenode-message>
     <nodes-details-view v-if="showDetails"
-        :host-name="hostName"
-        :cpu-type="cpuType"
-        :gpu-type="gpuType"
-        :cpu-usage="cpuUsage"
-        :ip-address="ipAddress"
-        :memory-usage="memoryUsage"
-        :platform="platform"
+        :host-name="currentHostName"
+        :cpu-type="currentCpuType"
+        :gpu-type="currentGpuType"
+        :cpu-usage="currentCpuUsage"
+        :ip-address="currentIpAddress"
+        :memory-usage="currentMemoryUsage"
+        :platform="currentPlatform"
         @detailsClosed="evaluateButtonEvents">
     </nodes-details-view>
     <nodes-addnewnode-message
@@ -95,13 +95,13 @@ name: "nodes-management",
         {'label':'Reboot', 'icon':'autorenew', 'size':'is-normal', 'type':'is-primary', 'fullwidth':'is-fullwidth'}
       ],
 
-      hostName: '',
-      cpuType: '',
-      gpuType: '',
-      cpuUsage: '',
-      memoryUsage: '',
-      ipAddress: '',
-      platform: '',
+      currentHostName: '',
+      currentCpuType: '',
+      currentGpuType: '',
+      currentCpuUsage: '',
+      currentMemoryUsage: '',
+      currentIpAddress: '',
+      currentPlatform: '',
 
       activeMessage: String,
       showDetails: false,
@@ -131,9 +131,9 @@ name: "nodes-management",
     },
     populateTable() {
       this.tableData = []
-      for(var index = 0; index < this.rawNodesData.length; index++) {
-        var raw = this.rawNodesData[index];
-        var entry = {
+      for(let index = 0; index < this.rawNodesData.length; index++) {
+        let raw = this.rawNodesData[index];
+        let entry = {
             'node_name': raw.hostname,
             'ip_address': raw.ip_address,
             'status': 'up'
@@ -143,16 +143,16 @@ name: "nodes-management",
     },
     populateDetailsView() {
       if (this.tableData && this.tableData.length) {
-        for(var indexOuter = 0; indexOuter < this.rawNodesData.length; indexOuter++) {
+        for(let indexOuter = 0; indexOuter < this.rawNodesData.length; indexOuter++) {
             if(this.rawNodesData[indexOuter].hostname === this.selectedTableData.node_name) {
               let temp = this.rawNodesData[indexOuter]
-              this.hostName = temp.hostname
-              this.cpuType = temp.cpu
-              this.gpuType = temp.gpu
-              this.cpuUsage = '' + temp.cpu_usage
-              this.memoryUsage = '' + temp.mem_usage
-              this.ipAddress = temp.ip_address
-              this.platform = temp.platform
+              this.currentHostName = temp.hostname
+              this.currentCpuType = temp.cpu
+              this.currentGpuType = temp.gpu
+              this.currentCpuUsage = '' + temp.cpu_usage
+              this.currentMemoryUsage = '' + temp.mem_usage
+              this.currentIpAddress = temp.ip_address
+              this.currentPlatform = temp.platform
             }
         }
       }
@@ -166,26 +166,26 @@ name: "nodes-management",
 
         switch(this.activeMessage) {
             case 'Details':
-                if (!(this.hostName === ''))
+                if (!(this.currentHostName === ''))
                   this.showDetails = true;
                 break;
             case 'Add New':
                 this.showAddNew = true;
                 break;
             case 'Remove':
-                if (!(this.hostName === ''))
+                if (!(this.currentHostName === ''))
                 this.showRemove = true;
                 break;
             case 'Power Up':
-                if (!(this.hostName === ''))
+                if (!(this.currentHostName === ''))
                 this.showPowerUp = true;
                 break;
             case 'Power Down':
-                if (!(this.hostName === ''))
+                if (!(this.currentHostName === ''))
                 this.showPowerDown = true;
                 break;
             case 'Reboot':
-                if (!(this.hostName === ''))
+                if (!(this.currentHostName === ''))
                 this.showReboot = true;
                 break;
             case 'AddNewClosed':

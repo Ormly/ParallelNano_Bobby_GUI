@@ -5,10 +5,16 @@
             :columns="tableColumns"
             @select="storeSelectedData">
         </base-table>
-        <br/>
         <users-button-container
-            :button-data="buttonData">
+            :button-data="buttonData"
+            @button-clicked="evaluateButtonEvents">
         </users-button-container>
+        <br/>
+        <users-removeuser-message
+            v-if="showRemove"
+            :user-to-remove="selectedTableData.user_name"
+            @removeClosed="evaluateButtonEvents">
+        </users-removeuser-message>
     </div>
 </template>
 
@@ -18,10 +24,11 @@ const usersAPI = APIFactory.get("users");
 
 import UsersButtonContainer from "@/components/users/users-button-container";
 import BaseTable from "@/components/base-components/base-table";
+import UsersRemoveuserMessage from "@/components/users/messages/users-removeuser-message"
 
 export default {
     name: "users-management",
-    components: {UsersButtonContainer, BaseTable},
+    components: {UsersButtonContainer, BaseTable, UsersRemoveuserMessage},
     created() {
       this.fetchUsersData()
       //this.pollAPI()
@@ -33,19 +40,32 @@ export default {
         return {
             //'username': 'devil06', 'home_directory': '/home/devil06'
             polling: null,
-            rawUsersData: {},
             isLoading: false,
+
+            rawUsersData: {},
             tableData: [],
             tableColumns: [
                 { field: 'user_name', label: 'Username' },
                 { field: 'home_directory', label: 'Home Directory'}
             ],
             selectedTableData: {},
+
             buttonData: [
                 {'label': 'Add New', 'icon': 'plus-thick', 'size': 'is-normal', 'type': 'is-primary', 'fullwidth':''},
                 {'label': 'Remove', 'icon': 'delete-forever', 'size': 'is-normal', 'type': 'is-primary', 'fullwidth':''}
-            ]
+            ],
+
+            activeMessage: String,
+            showRemove: false,
+            showAddNew: false,
+
+            currentUserName: ''
         }
+    },
+    watch: {
+      selectedTableData: function() {
+        this.setCurrentUserName();
+      }
     },
     methods: {
       async fetchUsersData() {
@@ -70,10 +90,46 @@ export default {
           this.tableData.push(entry)
         }
       },
-        storeSelectedData(selectedData)
-        {
-            this.selectedTableData = selectedData
+      setCurrentUserName() {
+        this.currentUserName = this.selectedTableData.user_name
+      },
+      evaluateButtonEvents(buttonLabel) {
+        this.closeActiveMessage();
+        this.activeMessage = buttonLabel;
+
+        switch(this.activeMessage) {
+          case 'Add New':
+            this.showAddNew = true;
+            break;
+          case 'Remove':
+            if (!(this.currentUserName === ''))
+              this.showRemove = true;
+            break;
+          case 'AddNewClosed':
+            this.showAddNew = false;
+            break;
+          case 'RemoveClosed':
+            this.showRemove = false;
+            break;
         }
+      },
+      closeActiveMessage() {
+        switch(this.activeMessage) {
+          case 'Add New':
+            this.showAddNew = false;
+            break;
+          case 'Remove':
+            this.showRemove = false;
+            break;
+        }
+      },
+      storeSelectedData(selectedData)
+      {
+          this.selectedTableData = selectedData
+      }
+    },
+    beforeDestroy() {
+      clearInterval(this.polling)
     }
 }
 </script>

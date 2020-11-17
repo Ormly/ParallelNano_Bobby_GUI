@@ -1,6 +1,6 @@
 <template>
     <div class="buttons has-addons">
-        <base-button v-for="dataItem in buttonData" :key="dataItem.label"
+        <base-button @base-button-clicked="propagateButtonEvent" v-for="dataItem in buttonData" :key="dataItem.label"
              :label="dataItem.label"
              :icon="dataItem.icon"
              :size="dataItem.size"
@@ -18,6 +18,11 @@ name: "users-button-container",
     components: {BaseButton},
     props: {
         buttonData: Array
+    },
+    methods: {
+      propagateButtonEvent(buttonLabel) {
+        this.$emit("button-clicked", buttonLabel);
+      }
     }
 }
 </script>
