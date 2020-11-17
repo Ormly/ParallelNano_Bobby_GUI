@@ -14,7 +14,7 @@
           </b-radio>
       </div>
     <b-field>
-      <b-input size="is-medium" :placeholder="selectedVariant" v-model="inputData"></b-input>
+      <b-input size="is-medium" :placeholder="selectedVariant" maxlength="30" v-model="inputData"></b-input>
       <p class="control">
           <b-button size="is-medium" class="button" @click="submitData" is-primary>
               Submit

@@ -1,0 +1,60 @@
+<template>
+  <b-message title="Add New User" size="is-large" @close="messageClosed">
+    <div class="columns">
+      <div class="column is-two-thirds">
+        <b-field>
+          <b-input size="is-medium" placeholder="Username" maxlength="30" v-model="inputDataUsername"></b-input>
+        </b-field>
+        <b-field><b-input type="password" size="is-medium" placeholder="Password" maxlength="30" v-model="inputDataPassword" password-reveal></b-input></b-field>
+      </div>
+    </div>
+    <yes-no-button-container
+        :button-data="buttonData"
+        :key="buttonData.label"
+        @button-clicked="evaluateButtonClick">
+    </yes-no-button-container>
+  </b-message>
+</template>
+
+<script>
+import YesNoButtonContainer from "@/components/base-components/base-yes-no-button-container";
+export default {
+name: "users-adduser-message",
+  components: {YesNoButtonContainer},
+  data() {
+    return {
+      inputDataUsername: '',
+      inputDataPassword: '',
+      submissionData: [],
+
+      buttonData: [
+        {'label':'Confirm', 'size':'is-large', 'type':'is-success'},
+        {'label':'Cancel', 'size':'is-large', 'type':'is-danger'}
+      ]
+    }
+  },
+  methods: {
+    evaluateButtonClick(buttonLabel) {
+      switch(buttonLabel) {
+        case('Confirm'):
+          this.submitData();
+          break;
+        case('Cancel'):
+          this.messageClosed();
+          break;
+      }
+    },
+    submitData() {
+      this.submissionData.push(this.inputDataUsername, this.inputDataPassword)
+      this.$emit("addNewUser", this.submissionData);
+    },
+    messageClosed() {
+      this.$emit("addNewClosed", "AddNewClosed");
+    }
+  }
+}
+</script>
+
+<style scoped>
+
+</style>

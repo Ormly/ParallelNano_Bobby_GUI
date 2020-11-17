@@ -15,6 +15,11 @@
             :user-to-remove="selectedTableData.user_name"
             @removeClosed="evaluateButtonEvents">
         </users-removeuser-message>
+        <users-adduser-message
+            v-if="showAddNew"
+            @addNewClosed="evaluateButtonEvents"
+            @addNewUser="evaluateButtonEvents">
+        </users-adduser-message>
     </div>
 </template>
 
@@ -25,10 +30,11 @@ const usersAPI = APIFactory.get("users");
 import UsersButtonContainer from "@/components/users/users-button-container";
 import BaseTable from "@/components/base-components/base-table";
 import UsersRemoveuserMessage from "@/components/users/messages/users-removeuser-message"
+import UsersAdduserMessage from "@/components/users/messages/users-adduser-message";
 
 export default {
     name: "users-management",
-    components: {UsersButtonContainer, BaseTable, UsersRemoveuserMessage},
+    components: {UsersAdduserMessage, UsersButtonContainer, BaseTable, UsersRemoveuserMessage},
     created() {
       this.fetchUsersData()
       //this.pollAPI()
