@@ -9,6 +9,7 @@
               parameter-sign="°C"
               :current-data-state="rawEnvironmentData.temperature">
           </data-display>
+          <br/>
           <data-display
               :icon-name="humidityIcon.icon"
               :icon-size="humidityIcon.size"
@@ -84,11 +85,17 @@ name: "data-management",
       },
       evaluateEvents(payload) {
         this.closeActiveMessages();
+        let temp = this.activeMessage
         this.activeMessage = payload;
 
         switch(payload) {
           case 'Settings':
-            this.showSettings = true
+            if(temp === payload) {
+              this.showSettings = false
+              this.activeMessage = ''
+            }
+            else
+              this.showSettings = true
             break;
           case 'SettingsClosed':
             this.showSettings = false;

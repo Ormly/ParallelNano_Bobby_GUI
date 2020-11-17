@@ -105,7 +105,7 @@ export default {
 
         switch(payload) {
           case 'Add New':
-            this.showAddNew = true;
+            this.showAddNew = true
             break;
           case 'Remove':
             if (!(this.currentUserName === ''))
