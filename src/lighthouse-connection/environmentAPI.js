@@ -9,6 +9,6 @@ export default {
         }
     },
     getEnvironmentData() {
-        return API.get(`${resource}`).then(response => this.info = response.data);
+        return API.get(`${resource}`).then(response => this.info = response.data.sensor_status);
     }
 };
