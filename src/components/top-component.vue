@@ -2,7 +2,10 @@
   <div class="columns">
     <div class="column is-two-fifths">
       <h1 class="is-size-1">Nodes</h1>
-      <nodes-management class="column"/>
+      <nodes-management class="column"
+        :panic="panic"
+        @panicReset="panicReset">
+      </nodes-management>
     </div>
     <div class="column is-two-fifths">
         <h1 class="is-size-1">Users</h1>
@@ -10,7 +13,9 @@
     </div>
     <div class="column">
         <h1 class="is-size-1">Environment</h1>
-        <data-management class="column"></data-management>
+        <data-management class="column"
+          @systemShutdown="systemShutdown">
+        </data-management>
     </div>
   </div>
 </template>
@@ -21,7 +26,20 @@ import UsersManagement from "@/components/users/users-management";
 import DataManagement from "@/components/environment/data-management";
 export default {
 name: "top-component",
-  components: {DataManagement, NodesManagement, UsersManagement}
+  components: {DataManagement, NodesManagement, UsersManagement},
+  data() {
+    return {
+      panic: false
+    }
+  },
+  methods: {
+    systemShutdown() {
+      this.panic = true
+    },
+    panicReset() {
+      this.panic = false
+    }
+  }
 }
 </script>
 

@@ -32,6 +32,12 @@
           @settingsClosed="evaluateEvents"
           @settingsChanged="changeThresholds">
       </data-threshold-message>
+      <data-warning-message
+        :alert="panic"
+        v-if="showPanic"
+        @panicClosed="evaluateEvents"
+        @systemShutdown="systemShutdown">
+      </data-warning-message>
     </div>
 </template>
 
@@ -42,22 +48,28 @@ const environmentAPI = APIFactory.get("environment");
 import DataDisplay from "@/components/environment/data-display";
 import BaseButton from "@/components/base-components/base-button";
 import DataThresholdMessage from "@/components/environment/messages/data-threshold-message";
+import DataWarningMessage from "@/components/environment/messages/data-warning-message";
 export default {
 name: "data-management",
-    components: {DataThresholdMessage, DataDisplay, BaseButton},
+    components: {DataWarningMessage, DataThresholdMessage, DataDisplay, BaseButton},
     created() {
       this.fetchEnvironmentData()
-      //this.pollAPI()
+      this.pollAPI()
     },
     data() {
         return {
             polling: null,
             isLoading: false,
+            panic: false,
+            showPanic: false,
 
             rawEnvironmentData: {},
 
             temperatureThreshold: 90,
             humidityThreshold: 60,
+
+            currentTemperature: null,
+            currentHumidity: null,
 
             temperatureIcon: {
                 'icon': 'thermometer',
@@ -72,11 +84,31 @@ name: "data-management",
             showSettings: false
         }
     },
+    watch: {
+      currentTemperature: function() {
+        if(this.currentTemperature >= this.temperatureThreshold) {
+          this.panic = true
+          this.showPanic = this.panic
+        }
+      },
+      currentHumidity: function() {
+        if(this.currentHumidity >= this.humidityThreshold) {
+          this.panic = true
+          this.showPanic = this.panic
+        }
+      }
+    },
     methods: {
       async fetchEnvironmentData() {
         this.isLoading = true
         this.rawEnvironmentData = await environmentAPI.getEnvironmentData()
         this.isLoading = false
+
+        this.setCurrentEnvironmentValues()
+      },
+      setCurrentEnvironmentValues() {
+        this.currentTemperature = this.rawEnvironmentData.temperature
+        this.currentHumidity =  this.rawEnvironmentData.humidity
       },
       pollAPI () {
         this.polling = setInterval(() => {
@@ -100,6 +132,9 @@ name: "data-management",
           case 'SettingsClosed':
             this.showSettings = false;
             break;
+          case 'PanicClosed':
+            this.showPanic = false;
+            break;
         }
       },
       closeActiveMessages() {
@@ -114,6 +149,10 @@ name: "data-management",
         this.humidityThreshold = parseInt(thresholds[1]);
 
         this.closeActiveMessages()
+      },
+      systemShutdown() {
+        this.$emit("systemShutdown", "SystemShutdown")
+        this.panic = false
       }
     },
     beforeDestroy() {

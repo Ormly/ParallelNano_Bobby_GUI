@@ -117,7 +117,13 @@ name: "nodes-management",
   watch: {
     selectedTableData: function() {
       this.populateDetailsView();
+    },
+    panic: function() {
+      this.systemShutdown()
     }
+  },
+  props: {
+    panic: Boolean
   },
   methods: {
     async fetchCurrentNodesData() {
@@ -167,6 +173,11 @@ name: "nodes-management",
     },
     storeSelectedData(selectedData) {
       this.selectedTableData = selectedData
+    },
+    systemShutdown() {
+      //API shutdown call to all nodes
+
+      this.$emit("panicReset","PanicReset")
     },
     checkNodeStatus() {
       for(let indexOuter = 0; indexOuter < this.availableNodesData.length; indexOuter++) {
