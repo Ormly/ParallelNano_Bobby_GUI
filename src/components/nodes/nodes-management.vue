@@ -67,9 +67,9 @@ name: "nodes-management",
     NodesPowerdownMessage,
     NodesRemovenodeMessage, NodesAddnewnodeMessage, NodesDetailsView, NodesButtonContainer, BaseTable},
   created() {
-    this.fetchNodesData()
-    //this.pollAPI()
-    this.populateTable()
+    this.fetchAvailableNodesData()
+    this.fetchCurrentNodesData()
+    this.pollAPI()
     //{ 'node_name': 'Johnny_06', 'ip_address': '10.0.0.209', 'status': 'Up'}
   },
   data() {
@@ -77,7 +77,9 @@ name: "nodes-management",
       polling: null,
       isLoading: false,
 
-      rawNodesData: {},
+      currentNodesData: {},
+      availableNodesData: {},
+
       tableData: [],
       tableColumns: [
         { field: 'node_name', label: 'Node'},
@@ -118,34 +120,40 @@ name: "nodes-management",
     }
   },
   methods: {
-    async fetchNodesData() {
+    async fetchCurrentNodesData() {
       this.isLoading = true
-      this.rawNodesData = await nodesAPI.getNodesData()
+      this.currentNodesData = await nodesAPI.getNodesData()
       this.isLoading = false
-      this.populateTable()
+      this.checkNodeStatus()
     },
     pollAPI () {
       this.polling = setInterval(() => {
-        this.fetchNodesData()
-      }, 10000)
+        this.fetchCurrentNodesData()
+      }, 5000)
+    },
+    async fetchAvailableNodesData() {
+      this.availableNodesData = await nodesAPI.getAvailableNodes()
+      this.populateTable()
     },
     populateTable() {
       this.tableData = []
-      for(let index = 0; index < this.rawNodesData.length; index++) {
-        let raw = this.rawNodesData[index];
+      for(let index = 0; index < this.availableNodesData.length; index++) {
+        let raw = this.availableNodesData[index];
+        let name = raw.hostname
+        let ip = raw.ip_address
         let entry = {
-            'node_name': raw.hostname,
-            'ip_address': raw.ip_address,
-            'status': 'up'
+            'node_name': name,
+            'ip_address': ip,
+            'status': '?'
         }
         this.tableData.push(entry)
       }
     },
     populateDetailsView() {
       if (this.tableData && this.tableData.length) {
-        for(let indexOuter = 0; indexOuter < this.rawNodesData.length; indexOuter++) {
-            if(this.rawNodesData[indexOuter].hostname === this.selectedTableData.node_name) {
-              let temp = this.rawNodesData[indexOuter]
+        for(let indexOuter = 0; indexOuter < this.currentNodesData.length; indexOuter++) {
+            if(this.currentNodesData[indexOuter].hostname === this.selectedTableData.node_name) {
+              let temp = this.currentNodesData[indexOuter]
               this.currentHostName = temp.hostname
               this.currentCpuType = temp.cpu
               this.currentGpuType = temp.gpu
@@ -159,6 +167,29 @@ name: "nodes-management",
     },
     storeSelectedData(selectedData) {
       this.selectedTableData = selectedData
+    },
+    checkNodeStatus() {
+      for(let indexOuter = 0; indexOuter < this.availableNodesData.length; indexOuter++) {
+        let baseNodeName = this.availableNodesData[indexOuter].hostname
+        let nodeState = false;
+        for(let indexInner = 0; indexInner < this.currentNodesData.length; indexInner++) {
+          let variableNodeName = this.currentNodesData[indexInner].hostname
+          if(baseNodeName === variableNodeName) {
+            this.tableData[indexInner].status = 'Up'
+            nodeState = true
+            break;
+          }
+        }
+        if(!nodeState) {
+          for(let indexTable = 0; indexTable < this.tableData.length; indexTable++) {
+            let tableEntryName = this.tableData[indexTable].node_name
+            if(baseNodeName === tableEntryName) {
+              this.tableData[indexTable].status = 'Down'
+              break;
+            }
+          }
+        }
+      }
     },
     evaluateButtonEvents(buttonLabel) {
         this.closeActiveMessage();
