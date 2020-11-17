@@ -190,7 +190,7 @@ name: "nodes-management",
 
         switch(this.activeMessage) {
             case 'Details':
-                if (!(this.currentHostName === ''))
+                if (!(this.currentHostName === '') && this.selectedTableData.status === 'Up')
                   this.showDetails = true;
                 break;
             case 'Add New':
