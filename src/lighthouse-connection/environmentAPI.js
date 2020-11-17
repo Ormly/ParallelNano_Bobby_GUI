@@ -1,6 +1,6 @@
 import API from "@/lighthouse-connection/API";
 
-const resource = "/temp_humidity";
+const resource = "/sensor_status";
 
 export default {
     data() {

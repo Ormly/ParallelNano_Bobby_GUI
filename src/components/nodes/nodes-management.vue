@@ -130,17 +130,15 @@ name: "nodes-management",
     },
     async fetchAvailableNodesData() {
       this.availableNodesData = await nodesAPI.getAvailableNodes()
-      this.populateTable()
+      this.seedTable()
     },
-    populateTable() {
+    seedTable() {
       this.tableData = []
       for(let index = 0; index < this.availableNodesData.length; index++) {
         let raw = this.availableNodesData[index];
-        let name = raw.hostname
-        let ip = raw.ip_address
         let entry = {
-            'node_name': name,
-            'ip_address': ip,
+            'node_name': raw,
+            'ip_address': '?',
             'status': '?'
         }
         this.tableData.push(entry)
@@ -172,12 +170,13 @@ name: "nodes-management",
     },
     checkNodeStatus() {
       for(let indexOuter = 0; indexOuter < this.availableNodesData.length; indexOuter++) {
-        let baseNode = this.availableNodesData[indexOuter].hostname
+        let baseNode = this.availableNodesData[indexOuter]
         let liveness = false
         for(let indexInner = 0; indexInner < this.currentNodesData.length; indexInner++) {
           let liveNode = this.currentNodesData[indexInner].hostname
           if(baseNode === liveNode) {
             this.tableData[indexOuter].status = 'Up'
+            this.tableData[indexOuter].ip_address = this.currentNodesData[indexInner].ip_address
             liveness = true
             break;
           }

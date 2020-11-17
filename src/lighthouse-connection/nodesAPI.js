@@ -10,7 +10,7 @@ export default {
         }
     },
     getNodesData() {
-        return API.get(`${status}`).then(response => this.info = response.data);
+        return API.get(`${status}`).then(response => this.info = response.data.nodes_status);
     },
     getAvailableNodes() {
         return API.get(`${nodes}`).then(response => this.info = response.data.response.nodes);

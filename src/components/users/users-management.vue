@@ -80,6 +80,13 @@ export default {
         this.isLoading = false
         this.populateTable()
       },
+      async createUser(username, password, type) {
+        this.isLoading = true
+        let response = await usersAPI.createUser(username, password, type)
+        this.isLoading = false
+
+        if(response !== 'OK');
+      },
       pollAPI () {
         this.polling = setInterval(() => {
           this.fetchUsersData()
