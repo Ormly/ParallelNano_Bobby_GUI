@@ -82,7 +82,7 @@ name: "nodes-management",
         { field: 'status', label: 'Status'}
       ],
       selectedTableData: {},
-      selectedNodeNumber: Number,
+      selectedNodeNumber: null,
 
       buttonData: [
         {'label':'Details', 'icon':'help-circle', 'size':'is-normal', 'type':'is-primary', 'fullwidth':'is-fullwidth'},
@@ -110,6 +110,7 @@ name: "nodes-management",
   },
   watch: {
     selectedTableData: function() {
+      this.setSelectedNodeNumber()
       this.populateDetailsView();
     },
     panic: function() {
@@ -137,18 +138,18 @@ name: "nodes-management",
     },
     async powerDownSelectedNode() {
       this.isFetchingShutdownResponse = true
-      let response = await nodesAPI.powerDownNode(this.getSelectedNodeNumber())
+      let response = await nodesAPI.powerDownNode(this.selectedNodeNumber)
       this.isFetchingShutdownResponse = false
 
       if(response === 'OK');
     },
-    getSelectedNodeNumber() {
+    setSelectedNodeNumber() {
       for(let index = 0; index < this.tableData.length; index++) {
         let selectedName = this.selectedTableData.node_name
         let nameInTable = this.tableData[index].node_name
 
         if(selectedName === nameInTable)
-          return index
+          this.selectedNodeNumber = index
       }
     },
     seedTable() {
