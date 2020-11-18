@@ -230,17 +230,18 @@ name: "nodes-management",
                 this.showAddNew = true;
                 break;
             case 'Power Up':
-                if (!(this.currentHostName === ''))
-                this.showPowerUp = true;
-                this.powerUpSelectedNode()
+                if (!(this.currentHostName === '')){
+                  this.showPowerUp = true;
+                  this.powerUpSelectedNode()
+                }
                 break;
             case 'Power Down':
                 if (!(this.currentHostName === ''))
-                this.showPowerDown = true;
+                  this.showPowerDown = true;
                 break;
             case 'Reboot':
                 if (!(this.currentHostName === ''))
-                this.showReboot = true;
+                  this.showReboot = true;
                 break;
             case 'AddNewClosed':
                 this.showAddNew = false;
