@@ -5,6 +5,19 @@
         <b-field>
           <b-input size="is-medium" placeholder="Username" maxlength="30" v-model="inputDataUsername"></b-input>
         </b-field>
+        <div class="block">
+          <b-radio v-model="radio"
+                   native-value="Admin"
+                   @input="evaluatePowerDownRadio">
+            Admin
+          </b-radio>
+          <br/>
+          <b-radio v-model="radio"
+                   native-value="User"
+                   @input="evaluatePowerDownRadio">
+            User
+          </b-radio>
+        </div>
         <b-field>
           <b-input type="password" size="is-medium" placeholder="Password" maxlength="30" v-model="inputDataPassword" password-reveal></b-input>
         </b-field>
@@ -27,7 +40,10 @@ name: "users-adduser-message",
     return {
       inputDataUsername: '',
       inputDataPassword: '',
+      inputUserType: '',
       submissionData: [],
+
+      radio: String,
 
       buttonData: [
         {'label':'Confirm', 'size':'is-large', 'type':'is-success'},
@@ -46,8 +62,18 @@ name: "users-adduser-message",
           break;
       }
     },
+    evaluatePowerDownRadio() {
+      switch(this.radio) {
+        case 'User':
+          this.inputUserType = 'User'
+          break;
+        case 'Admin':
+          this.inputUserType = 'Admin'
+          break;
+      }
+    },
     submitData() {
-      this.submissionData.push(this.inputDataUsername, this.inputDataPassword)
+      this.submissionData.push(this.inputDataUsername, this.inputDataPassword, this.inputUserType)
       this.$emit("addNewUser", this.submissionData);
     },
     messageClosed() {

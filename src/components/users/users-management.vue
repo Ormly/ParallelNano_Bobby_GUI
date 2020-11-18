@@ -18,7 +18,7 @@
         <users-adduser-message
             v-if="showAddNew"
             @addNewClosed="evaluateEvents"
-            @addNewUser="evaluateEvents">
+            @addNewUser="createUser">
         </users-adduser-message>
     </div>
 </template>
@@ -37,7 +37,7 @@ export default {
     components: {UsersAdduserMessage, UsersButtonContainer, BaseTable, UsersRemoveuserMessage},
     created() {
       this.fetchUsersData()
-      //this.pollAPI()
+      this.pollAPI()
       this.populateTable()
       //{ 'node_name': 'Johnny_06', 'ip_address': '10.0.0.209', 'status': 'Up'}
    },
@@ -46,7 +46,8 @@ export default {
         return {
             //'username': 'devil06', 'home_directory': '/home/devil06'
             polling: null,
-            isLoading: false,
+            isFetchingUserData: false,
+            isFetchingCreateResponse: false,
 
             rawUsersData: {},
             tableData: [],
@@ -75,17 +76,19 @@ export default {
     },
     methods: {
       async fetchUsersData() {
-        this.isLoading = true
+        this.isFetchingUserData = true
         this.rawUsersData = await usersAPI.getUsersData()
-        this.isLoading = false
+        this.isFetchingUserData = false
         this.populateTable()
       },
-      async createUser(username, password, type) {
-        this.isLoading = true
-        let response = await usersAPI.createUser(username, password, type)
-        this.isLoading = false
+      async createUser(submissionData) {
+        this.showAddNew = false
 
-        if(response !== 'OK');
+        this.isFetchingCreateResponse = true
+        let response = await usersAPI.createUser(submissionData[0],submissionData[1],submissionData[2])
+        this.isFetchingCreateResponse = false
+
+        if(response === 'success');
       },
       pollAPI () {
         this.polling = setInterval(() => {

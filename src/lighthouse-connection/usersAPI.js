@@ -17,6 +17,7 @@ export default {
 
     },
     createUser(user_name, user_password, user_type) {
-        return API.get(`${userCreation}`, {params:{username: user_name, password: user_password, usertype: user_type}}).then(response => this.info = response.data.response.status);
+        let url = `${userCreation}` + '/' + user_name + '/' + user_password + '/' + user_type
+        return API.get(url).then(response => this.info = response.data.response.result);
     }
 };
