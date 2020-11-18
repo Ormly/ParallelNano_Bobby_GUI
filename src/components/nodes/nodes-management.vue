@@ -27,7 +27,8 @@
     <nodes-powerdown-message
         v-if="showPowerDown"
         :node-to-power-down="selectedTableData.node_name"
-        @powerDownClosed="evaluateButtonEvents">
+        @powerDownClosed="evaluateButtonEvents"
+        @powerDown="powerDownSelectedNode">
     </nodes-powerdown-message>
     <nodes-powerup-message
         v-if="showPowerUp"
@@ -68,7 +69,8 @@ name: "nodes-management",
   data() {
     return {
       polling: null,
-      isLoading: false,
+      isFetchingCurrentData: false,
+      isFetchingShutdownResponse: false,
 
       currentNodesData: {},
       availableNodesData: {},
@@ -80,6 +82,7 @@ name: "nodes-management",
         { field: 'status', label: 'Status'}
       ],
       selectedTableData: {},
+      selectedNodeNumber: Number,
 
       buttonData: [
         {'label':'Details', 'icon':'help-circle', 'size':'is-normal', 'type':'is-primary', 'fullwidth':'is-fullwidth'},
@@ -118,9 +121,9 @@ name: "nodes-management",
   },
   methods: {
     async fetchCurrentNodesData() {
-      this.isLoading = true
+      this.isFetchingCurrentData = true
       this.currentNodesData = await nodesAPI.getNodesData()
-      this.isLoading = false
+      this.isFetchingCurrentData = false
       this.checkNodeStatus()
     },
     pollAPI () {
@@ -131,6 +134,22 @@ name: "nodes-management",
     async fetchAvailableNodesData() {
       this.availableNodesData = await nodesAPI.getAvailableNodes()
       this.seedTable()
+    },
+    async powerDownSelectedNode() {
+      this.isFetchingShutdownResponse = true
+      let response = await nodesAPI.powerDownNode(this.getSelectedNodeNumber())
+      this.isFetchingShutdownResponse = false
+
+      if(response === 'OK');
+    },
+    getSelectedNodeNumber() {
+      for(let index = 0; index < this.tableData.length; index++) {
+        let selectedName = this.selectedTableData.node_name
+        let nameInTable = this.tableData[index].node_name
+
+        if(selectedName === nameInTable)
+          return index
+      }
     },
     seedTable() {
       this.tableData = []
@@ -165,6 +184,7 @@ name: "nodes-management",
     },
     systemShutdown() {
       //API shutdown call to all nodes
+      let oldSelected = this.selectedTableData
 
       this.$emit("panicReset","PanicReset")
     },

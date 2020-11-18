@@ -41,7 +41,8 @@ name: "nodes-powerdown-message",
       radio: String,
       inputData: '',
       showInput: false,
-      minutesUntilPowerDown: Number
+      minutesUntilPowerDown: Number,
+      inputTimeDecision: ''
     }
   },
   methods: {
@@ -51,6 +52,8 @@ name: "nodes-powerdown-message",
     evaluateButtonClick(buttonLabel) {
       switch(buttonLabel) {
         case('Power Down'):
+          this.submitData()
+          break;
         case('Cancel'):
           this.messageClosed();
           break;
@@ -59,12 +62,18 @@ name: "nodes-powerdown-message",
     evaluatePowerDownRadio() {
       switch(this.radio) {
         case 'Power Down immediately':
+          this.inputTimeDecision = 'immediate'
           this.showInput = false;
           break;
         case 'Power Down in X Minutes':
+          this.inputTimeDecision = 'later'
           this.showInput = true;
           break;
       }
+    },
+    submitData() {
+      if(this.inputTimeDecision === 'immediate')
+        this.$emit("powerDown","PowerDown")
     }
   },
   props: {
