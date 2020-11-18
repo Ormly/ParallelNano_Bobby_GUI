@@ -1,79 +1,46 @@
 <template>
-  <b-message :title="messageTitle" size="is-large" @close="messageClosed">
-    <div class="block">
-      <b-radio v-model="radio"
-               native-value="Power Down immediately"
-               @input="evaluatePowerDownRadio">
-        Power Down immediately
-      </b-radio>
+  <div>
+    <b-message v-if="isReachable" type="is-info" size="is-large">
+      <h1 class="is-size-3"><strong>{{node}}</strong> is being powered down!</h1>
       <br/>
-      <b-radio v-model="radio"
-               native-value="Power Down in X Minutes"
-               @input="evaluatePowerDownRadio">
-        Power Down in X Minutes
-      </b-radio>
-    </div>
-    <div v-if="showInput" class="container">
-      <span class="columns"><b-input size="is-medium" v-model="inputData" class="column is-one-fifth"></b-input>
-      <span class="column">Minutes from now</span></span>
-    </div>
-    <br/>
-    <yes-no-button-container
-        :button-data="buttonData"
-        :key="buttonData.label"
-        @button-clicked="evaluateButtonClick">
-    </yes-no-button-container>
-  </b-message>
+      <base-button @base-button-clicked="messageClosed"
+                   :key="buttonData.label"
+                   :label="buttonData.label"
+                   :size="buttonData.size"
+                   :type="buttonData.type">
+      </base-button>
+    </b-message>
+    <b-message v-if="!isReachable" type="is-danger" size="is-large">
+      <h1 class="is-size-3"><strong>{{node}}</strong> cannot be reached!</h1>
+      <br/>
+      <base-button @base-button-clicked="messageClosed"
+                   :key="buttonData.label"
+                   :label="buttonData.label"
+                   :size="buttonData.size"
+                   :type="buttonData.type">
+      </base-button>
+    </b-message>
+  </div>
 </template>
 
 <script>
-import YesNoButtonContainer from "@/components/base-components/base-yes-no-button-container";
+import BaseButton from "@/components/base-components/base-button";
 export default {
-name: "nodes-powerdown-message",
-  components: {YesNoButtonContainer},
+  name: "nodes-powerdown-message",
+  components: {BaseButton},
+  created() {
+    this.node = this.nodeToPowerDown
+  },
   data() {
     return {
-      buttonData: [
-        {'label':'Power Down', 'size':'is-large', 'type':'is-success'},
-        {'label':'Cancel', 'size':'is-large', 'type':'is-danger'}
-      ],
-      messageTitle: "Power Down " + this.nodeToPowerDown,
-      radio: String,
-      inputData: '',
-      showInput: false,
-      minutesUntilPowerDown: Number,
-      inputTimeDecision: ''
+      buttonData: {'label':'Confirm', 'size':'is-large', 'type':'is-primary'},
+      isReachable: true,
+      node: String
     }
   },
   methods: {
     messageClosed() {
       this.$emit("powerDownClosed", "PowerDownClosed");
-    },
-    evaluateButtonClick(buttonLabel) {
-      switch(buttonLabel) {
-        case('Power Down'):
-          this.submitData()
-          break;
-        case('Cancel'):
-          this.messageClosed();
-          break;
-      }
-    },
-    evaluatePowerDownRadio() {
-      switch(this.radio) {
-        case 'Power Down immediately':
-          this.inputTimeDecision = 'immediate'
-          this.showInput = false;
-          break;
-        case 'Power Down in X Minutes':
-          this.inputTimeDecision = 'later'
-          this.showInput = true;
-          break;
-      }
-    },
-    submitData() {
-      if(this.inputTimeDecision === 'immediate')
-        this.$emit("powerDown","PowerDown")
     }
   },
   props: {

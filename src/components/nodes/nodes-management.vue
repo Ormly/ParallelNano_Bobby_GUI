@@ -27,8 +27,7 @@
     <nodes-powerdown-message
         v-if="showPowerDown"
         :node-to-power-down="selectedTableData.node_name"
-        @powerDownClosed="evaluateButtonEvents"
-        @powerDown="powerDownSelectedNode">
+        @powerDownClosed="evaluateButtonEvents">
     </nodes-powerdown-message>
     <nodes-powerup-message
         v-if="showPowerUp"
@@ -139,8 +138,6 @@ name: "nodes-management",
       this.seedTable()
     },
     async powerDownSelectedNode() {
-      this.showPowerDown = false
-
       this.isFetchingShutdownResponse = true
       let response = await nodesAPI.powerDownNode(this.selectedNodeNumber)
       this.isFetchingShutdownResponse = false
@@ -245,8 +242,10 @@ name: "nodes-management",
                 }
                 break;
             case 'Power Down':
-                if (!(this.currentHostName === ''))
+                if (!(this.currentHostName === '')) {
                   this.showPowerDown = true;
+                  this.powerDownSelectedNode()
+                }
                 break;
             case 'Reboot':
                 if (!(this.currentHostName === '')) {
