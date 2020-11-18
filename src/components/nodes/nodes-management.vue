@@ -130,13 +130,15 @@ name: "nodes-management",
     pollAPI () {
       this.polling = setInterval(() => {
         this.fetchCurrentNodesData()
-      }, 5000)
+      }, 2000)
     },
     async fetchAvailableNodesData() {
       this.availableNodesData = await nodesAPI.getAvailableNodes()
       this.seedTable()
     },
     async powerDownSelectedNode() {
+      this.showPowerDown = false
+
       this.isFetchingShutdownResponse = true
       let response = await nodesAPI.powerDownNode(this.selectedNodeNumber)
       this.isFetchingShutdownResponse = false
@@ -149,7 +151,7 @@ name: "nodes-management",
         let nameInTable = this.tableData[index].node_name
 
         if(selectedName === nameInTable)
-          this.selectedNodeNumber = index
+          this.selectedNodeNumber = index + 1
       }
     },
     seedTable() {
