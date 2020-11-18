@@ -7,14 +7,14 @@
               :icon-name="temperatureIcon.icon"
               :icon-size="temperatureIcon.size"
               parameter-sign="°C"
-              :current-data-state="rawEnvironmentData.current_temperature">
+              :current-data-state="currentTemperature">
           </data-display>
           <br/>
           <data-display
               :icon-name="humidityIcon.icon"
               :icon-size="humidityIcon.size"
               parameter-sign="%"
-              :current-data-state="rawEnvironmentData.current_humidity">
+              :current-data-state="currentHumidity">
           </data-display>
         </div>
       </div>
@@ -107,8 +107,8 @@ name: "data-management",
         this.setCurrentEnvironmentValues()
       },
       setCurrentEnvironmentValues() {
-        this.currentTemperature = this.rawEnvironmentData.current_temperature
-        this.currentHumidity =  this.rawEnvironmentData.current_humidity
+        this.currentTemperature = Math.trunc(this.rawEnvironmentData.current_temperature)
+        this.currentHumidity =  Math.trunc(this.rawEnvironmentData.current_humidity)
       },
       pollAPI () {
         this.polling = setInterval(() => {
