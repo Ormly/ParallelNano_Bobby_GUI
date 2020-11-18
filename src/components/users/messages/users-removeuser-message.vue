@@ -30,10 +30,15 @@ name: "users-removeuser-message",
     evaluateButtonClick(buttonLabel) {
       switch(buttonLabel) {
         case('Confirm'):
+          this.submitData()
+          break;
         case('Cancel'):
           this.messageClosed();
           break;
       }
+    },
+    submitData() {
+      this.$emit("removeUser","RemoveUser")
     }
   },
   props: {

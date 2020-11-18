@@ -13,7 +13,8 @@
         <users-removeuser-message
             v-if="showRemove"
             :user-to-remove="selectedTableData.user_name"
-            @removeClosed="evaluateEvents">
+            @removeClosed="evaluateEvents"
+            @removeUser="removeUser">
         </users-removeuser-message>
         <users-adduser-message
             v-if="showAddNew"
@@ -48,6 +49,7 @@ export default {
             polling: null,
             isFetchingUserData: false,
             isFetchingCreateResponse: false,
+            isFetchingRemoveResponse: false,
 
             rawUsersData: {},
             tableData: [],
@@ -90,10 +92,19 @@ export default {
 
         if(response === 'success');
       },
+      async removeUser() {
+        this.showRemove = false
+
+        this.isFetchingRemoveResponse = true
+        let response = await usersAPI.deleteUser(this.selectedTableData.user_name)
+        this.isFetchingRemoveResponse = false
+
+        if(response === 'success');
+      },
       pollAPI () {
         this.polling = setInterval(() => {
           this.fetchUsersData()
-        }, 10000)
+        }, 5000)
       },
       populateTable() {
         this.tableData = []
