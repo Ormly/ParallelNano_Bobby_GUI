@@ -3,7 +3,7 @@ import API from "@/lighthouse-connection/API";
 const status = "/nodes_status";
 const nodes = "/nodes";
 const powerDown = "/shutdown";
-const powerUp = "/power_up"
+const powerUp = "/power_on"
 
 export default {
     data() {
