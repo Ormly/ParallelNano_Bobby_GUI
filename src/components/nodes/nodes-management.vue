@@ -184,7 +184,7 @@ name: "nodes-management",
     },
     systemShutdown() {
       //API shutdown call to all nodes
-      let oldSelected = this.selectedTableData
+      //let oldSelected = this.selectedTableData
 
       this.$emit("panicReset","PanicReset")
     },
