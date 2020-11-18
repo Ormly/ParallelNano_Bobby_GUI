@@ -4,6 +4,7 @@ const status = "/nodes_status";
 const nodes = "/nodes";
 const powerDown = "/shutdown";
 const powerUp = "/power_on"
+const reboot = "/reset"
 
 export default {
     data() {
@@ -23,6 +24,10 @@ export default {
     },
     powerUpNode(nodeNumber) {
         let url = `${powerUp}` + '/' + nodeNumber;
+        return API.get(url).then(response => this.info = response.data.response.result)
+    },
+    rebootNode(nodeNumber) {
+        let url = `${reboot}` + '/' + nodeNumber;
         return API.get(url).then(response => this.info = response.data.response.result)
     }
 };

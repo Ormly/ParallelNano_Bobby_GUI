@@ -72,6 +72,7 @@ name: "nodes-management",
       isFetchingCurrentData: false,
       isFetchingShutdownResponse: false,
       isFetchingPowerupResponse: false,
+      isFetchingRebootResponse: false,
 
       currentNodesData: {},
       availableNodesData: {},
@@ -151,6 +152,14 @@ name: "nodes-management",
       this.isFetchingPowerupResponse = true
       let response = await nodesAPI.powerUpNode(this.selectedNodeNumber)
       this.isFetchingPowerupResponse = true
+
+      if(response === 'OK');
+    },
+    async rebootSelectedNode() {
+
+      this.isFetchingRebootResponse = true
+      let response = await nodesAPI.rebootNode(this.selectedNodeNumber)
+      this.isFetchingRebootResponse = true
 
       if(response === 'OK');
     },
@@ -240,8 +249,10 @@ name: "nodes-management",
                   this.showPowerDown = true;
                 break;
             case 'Reboot':
-                if (!(this.currentHostName === ''))
+                if (!(this.currentHostName === '')) {
                   this.showReboot = true;
+                  this.rebootSelectedNode()
+                }
                 break;
             case 'AddNewClosed':
                 this.showAddNew = false;
