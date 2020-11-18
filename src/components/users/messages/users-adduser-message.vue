@@ -65,10 +65,10 @@ name: "users-adduser-message",
     evaluatePowerDownRadio() {
       switch(this.radio) {
         case 'User':
-          this.inputUserType = 'User'
+          this.inputUserType = 'user'
           break;
         case 'Admin':
-          this.inputUserType = 'Admin'
+          this.inputUserType = 'admin'
           break;
       }
     },
