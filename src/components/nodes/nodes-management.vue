@@ -232,7 +232,7 @@ name: "nodes-management",
             case 'Power Up':
                 if (!(this.currentHostName === ''))
                 this.showPowerUp = true;
-                this.powerDownSelectedNode()
+                this.powerUpSelectedNode()
                 break;
             case 'Power Down':
                 if (!(this.currentHostName === ''))
