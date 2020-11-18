@@ -3,6 +3,7 @@ import API from "@/lighthouse-connection/API";
 const status = "/nodes_status";
 const nodes = "/nodes";
 const powerDown = "/shutdown";
+const powerUp = "/power_up"
 
 export default {
     data() {
@@ -18,6 +19,10 @@ export default {
     },
     powerDownNode(nodeNumber) {
         let url = `${powerDown}` + '/' + nodeNumber;
+        return API.get(url).then(response => this.info = response.data.response.result)
+    },
+    powerUpNode(nodeNumber) {
+        let url = `${powerUp}` + '/' + nodeNumber;
         return API.get(url).then(response => this.info = response.data.response.result)
     }
 };

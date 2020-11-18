@@ -71,6 +71,7 @@ name: "nodes-management",
       polling: null,
       isFetchingCurrentData: false,
       isFetchingShutdownResponse: false,
+      isFetchingPowerupResponse: false,
 
       currentNodesData: {},
       availableNodesData: {},
@@ -142,6 +143,14 @@ name: "nodes-management",
       this.isFetchingShutdownResponse = true
       let response = await nodesAPI.powerDownNode(this.selectedNodeNumber)
       this.isFetchingShutdownResponse = false
+
+      if(response === 'OK');
+    },
+    async powerUpSelectedNode() {
+
+      this.isFetchingPowerupResponse = true
+      let response = await nodesAPI.powerUpNode(this.selectedNodeNumber)
+      this.isFetchingPowerupResponse = true
 
       if(response === 'OK');
     },
@@ -223,6 +232,7 @@ name: "nodes-management",
             case 'Power Up':
                 if (!(this.currentHostName === ''))
                 this.showPowerUp = true;
+                this.powerDownSelectedNode()
                 break;
             case 'Power Down':
                 if (!(this.currentHostName === ''))
