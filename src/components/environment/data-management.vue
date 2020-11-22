@@ -49,6 +49,9 @@ import DataDisplay from "@/components/environment/data-display";
 import BaseButton from "@/components/base-components/base-button";
 import DataThresholdMessage from "@/components/environment/messages/data-threshold-message";
 import DataWarningMessage from "@/components/environment/messages/data-warning-message";
+/*
+ * Manages "Data" section of the GUI. Responsible for housing data display and relevant messages.
+ */
 export default {
 name: "data-management",
     components: {DataWarningMessage, DataThresholdMessage, DataDisplay, BaseButton},
@@ -80,6 +83,7 @@ name: "data-management",
                 'size': 'is-large'
             },
 
+            //currently shown message
             activeMessage: String,
             showSettings: false
         }
@@ -110,6 +114,7 @@ name: "data-management",
         this.currentTemperature = Math.trunc(this.rawEnvironmentData.current_temperature)
         this.currentHumidity =  Math.trunc(this.rawEnvironmentData.current_humidity)
       },
+      //Polls every 10 seconds
       pollAPI () {
         this.polling = setInterval(() => {
           this.fetchEnvironmentData()
@@ -151,6 +156,7 @@ name: "data-management",
         this.closeActiveMessages()
       },
       systemShutdown() {
+        //Propagate panic event.
         this.$emit("systemShutdown", "SystemShutdown")
         this.panic = false
       }

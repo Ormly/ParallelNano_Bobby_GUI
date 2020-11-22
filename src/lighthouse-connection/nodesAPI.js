@@ -6,6 +6,9 @@ const powerDown = "/shutdown";
 const powerUp = "/power_on"
 const reboot = "/reset"
 
+/*
+ * Nodes API endpoint, extendable.
+ */
 export default {
     data() {
         return {

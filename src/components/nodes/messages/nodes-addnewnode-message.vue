@@ -25,6 +25,9 @@
 </template>
 
 <script>
+/*
+ * [NOT IMPLEMENTED] A message which allows the user to input data for a new system node.
+ */
 export default {
 name: "nodes-addnewnode-message",
   data() {
@@ -46,6 +49,7 @@ name: "nodes-addnewnode-message",
           }
       },
       messageClosed() {
+          //Fire when the message is closed.
           this.$emit("addNewClosed", "AddNewClosed");
       },
       ipAddressSelected() {

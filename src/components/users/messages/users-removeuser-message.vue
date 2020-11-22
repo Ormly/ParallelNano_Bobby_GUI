@@ -12,6 +12,9 @@
 
 <script>
 import YesNoButtonContainer from "@/components/base-components/base-yes-no-button-container";
+/*
+ * A message which asks the user to confirm the deletion of a new node.
+ */
 export default {
 name: "users-removeuser-message",
   components: {YesNoButtonContainer},
@@ -25,6 +28,7 @@ name: "users-removeuser-message",
   },
   methods: {
     messageClosed() {
+      //Fire when message is closed
       this.$emit("removeClosed", "RemoveClosed");
     },
     evaluateButtonClick(buttonLabel) {
@@ -38,6 +42,7 @@ name: "users-removeuser-message",
       }
     },
     submitData() {
+      //Fire when selected user is supposed to be removed.
       this.$emit("removeUser","RemoveUser")
     }
   },

@@ -32,7 +32,9 @@ import UsersButtonContainer from "@/components/users/users-button-container";
 import BaseTable from "@/components/base-components/base-table";
 import UsersRemoveuserMessage from "@/components/users/messages/users-removeuser-message"
 import UsersAdduserMessage from "@/components/users/messages/users-adduser-message";
-
+/*
+ * Manages "Users" section of the GUI. Responsible for housing data display and relevant messages.
+ */
 export default {
     name: "users-management",
     components: {UsersAdduserMessage, UsersButtonContainer, BaseTable, UsersRemoveuserMessage},
@@ -40,12 +42,10 @@ export default {
       this.fetchUsersData()
       this.pollAPI()
       this.populateTable()
-      //{ 'node_name': 'Johnny_06', 'ip_address': '10.0.0.209', 'status': 'Up'}
    },
     data()
     {
         return {
-            //'username': 'devil06', 'home_directory': '/home/devil06'
             polling: null,
             isFetchingUserData: false,
             isFetchingCreateResponse: false,
@@ -90,6 +90,7 @@ export default {
         let response = await usersAPI.createUser(submissionData[0],submissionData[1],submissionData[2])
         this.isFetchingCreateResponse = false
 
+        //TODO: error handling
         if(response === 'success');
       },
       async removeUser() {

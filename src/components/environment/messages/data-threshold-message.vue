@@ -22,6 +22,9 @@
 
 <script>
 import YesNoButtonContainer from "@/components/base-components/base-yes-no-button-container";
+/*
+ * A message which allows the user to input new temperature/humidity thresholds.
+ */
 export default {
 name: "data-threshold-message",
   components: {YesNoButtonContainer},
@@ -50,9 +53,12 @@ name: "data-threshold-message",
     },
     submitData() {
       this.submissionData.push(this.inputDataTemperature, this.inputDataHumidity)
+      //Fire when the thresholds haven been input.
+      //@args The payload is the new threshold data.
       this.$emit("settingsChanged", this.submissionData);
     },
     messageClosed() {
+      //Fire when the message is closed.
       this.$emit("settingsClosed", "SettingsClosed");
     }
   }

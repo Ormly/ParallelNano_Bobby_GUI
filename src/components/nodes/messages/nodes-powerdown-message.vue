@@ -25,6 +25,9 @@
 
 <script>
 import BaseButton from "@/components/base-components/base-button";
+/*
+ * A message which informs the user about a selected node being powered down.
+ */
 export default {
   name: "nodes-powerdown-message",
   components: {BaseButton},
@@ -40,6 +43,7 @@ export default {
   },
   methods: {
     messageClosed() {
+      //Fire when the message is closed.
       this.$emit("powerDownClosed", "PowerDownClosed");
     }
   },

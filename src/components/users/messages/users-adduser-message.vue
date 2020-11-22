@@ -33,6 +33,9 @@
 
 <script>
 import YesNoButtonContainer from "@/components/base-components/base-yes-no-button-container";
+/*
+ * A message which asks the user for input in order to add a new user to the system.
+ */
 export default {
 name: "users-adduser-message",
   components: {YesNoButtonContainer},
@@ -74,9 +77,12 @@ name: "users-adduser-message",
     },
     submitData() {
       this.submissionData.push(this.inputDataUsername, this.inputDataPassword, this.inputUserType)
+      //Fire when new user is supposed to be added
+      //@args payload carries data regarding user to be added
       this.$emit("addNewUser", this.submissionData);
     },
     messageClosed() {
+      //Fire when message is closed
       this.$emit("addNewClosed", "AddNewClosed");
     }
   }

@@ -25,6 +25,9 @@
 
 <script>
 import BaseButton from "@/components/base-components/base-button";
+/*
+ * A message which informs the user about a node being rebooted.
+ */
 export default {
 name: "nodes-reboot-message",
   components: {BaseButton},
@@ -40,6 +43,7 @@ name: "nodes-reboot-message",
   },
   methods: {
     messageClosed() {
+      //Fire when the message is closed.
       this.$emit("rebootClosed", "RebootClosed");
     }
   },

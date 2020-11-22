@@ -8,6 +8,9 @@ const apis = {
     nodes: nodesAPI
 };
 
+/*
+ * Simple factory meant to provide API endpoints for environment, user and nodes sections.
+ */
 export const APIFactory = {
     get: name => apis[name]
 };

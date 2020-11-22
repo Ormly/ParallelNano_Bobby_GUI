@@ -24,6 +24,9 @@
 import NodesManagement from "@/components/nodes/nodes-management";
 import UsersManagement from "@/components/users/users-management";
 import DataManagement from "@/components/environment/data-management";
+/*
+ * Top component which holds all management components. Also serves as a relay point for the panic signal (not fully implemented at this stage).
+ */
 export default {
 name: "top-component",
   components: {DataManagement, NodesManagement, UsersManagement},

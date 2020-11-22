@@ -36,6 +36,9 @@
 
 <script>
 import BaseButton from "@/components/base-components/base-button";
+/*
+ * Helper component to display buttons below the nodes table.
+ */
 export default {
 name: "nodes-button-container",
   components: {BaseButton},
@@ -55,6 +58,8 @@ name: "nodes-button-container",
   },
   methods: {
     propagateButtonEvent(buttonLabel) {
+        // Fire when a button is clicked.
+        // @args The payload is the label of the button, for identification purposes.
         this.$emit("button-clicked", buttonLabel);
     }
   }

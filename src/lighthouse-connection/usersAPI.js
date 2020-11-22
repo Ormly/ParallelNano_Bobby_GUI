@@ -4,6 +4,9 @@ const userData = "/user_list";
 const userDeletion = "/remove_user";
 const userCreation = "/create_user";
 
+/*
+ * Users API endpoint, extendable.
+ */
 export default {
     data() {
         return {

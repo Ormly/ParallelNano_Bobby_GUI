@@ -10,10 +10,14 @@
 </template>
 
 <script>
+/*
+ * This component represents a basic button, complete with a prop-given type, label, icon and size. All base-buttons are fullwidth.
+ */
 export default {
 name: "base-button",
   props: {
     label: String,
+    //Has to be material design icon.
     icon: String,
     size: String,
     type: String,
@@ -21,6 +25,8 @@ name: "base-button",
   },
   methods: {
     clicked() {
+      // Fire when the base-button is clicked.
+      // @args The payload is the label of the button, for identification purposes.
       this.$emit("base-button-clicked", this.label)
     }
   }

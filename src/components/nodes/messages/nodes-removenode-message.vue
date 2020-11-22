@@ -12,6 +12,9 @@
 
 <script>
 import YesNoButtonContainer from "@/components/base-components/base-yes-no-button-container";
+/*
+ * [NOT IMPLEMENTED] A message which asks for user input regarding removing a selected node.
+ */
 export default {
 name: "nodes-removenode-message",
     components: {YesNoButtonContainer},
@@ -25,6 +28,7 @@ name: "nodes-removenode-message",
     },
     methods: {
         messageClosed() {
+            //Fire when the message is closed.
             this.$emit("removeClosed", "RemoveClosed");
         },
         evaluateButtonClick(buttonLabel) {

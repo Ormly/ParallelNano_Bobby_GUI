@@ -8,6 +8,9 @@
 </style>
 <script>
 import TopComponent from "@/components/top-component";
+/*
+ * Vue entry point
+ */
 export default {
   components: {TopComponent}
 }

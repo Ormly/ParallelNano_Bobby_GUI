@@ -17,6 +17,9 @@
 </template>
 
 <script>
+/*
+ * Displays the relevant environmental parameters to the user.
+ */
 export default {
 name: "data-display",
     props: {

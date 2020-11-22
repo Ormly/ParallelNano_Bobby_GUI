@@ -53,6 +53,9 @@ import NodesAddnewnodeMessage from "@/components/nodes/messages/nodes-addnewnode
 import NodesPowerdownMessage from "@/components/nodes/messages/nodes-powerdown-message";
 import NodesPowerupMessage from "@/components/nodes/messages/nodes-powerup-message";
 import NodesRebootMessage from "@/components/nodes/messages/nodes-reboot-message";
+/*
+ * Manages "Nodes" section of the GUI. Responsible for housing data display and relevant messages.
+ */
 export default {
 name: "nodes-management",
   components: {
@@ -63,7 +66,6 @@ name: "nodes-management",
     this.fetchAvailableNodesData()
     this.fetchCurrentNodesData()
     this.pollAPI()
-    //{ 'node_name': 'Johnny_06', 'ip_address': '10.0.0.209', 'status': 'Up'}
   },
   data() {
     return {
@@ -119,6 +121,7 @@ name: "nodes-management",
     }
   },
   props: {
+    //system environment critical
     panic: Boolean
   },
   methods: {
@@ -128,6 +131,7 @@ name: "nodes-management",
       this.isFetchingCurrentData = false
       this.checkNodeStatus()
     },
+    //polls every 2 seconds
     pollAPI () {
       this.polling = setInterval(() => {
         this.fetchCurrentNodesData()
@@ -142,6 +146,7 @@ name: "nodes-management",
       let response = await nodesAPI.powerDownNode(this.selectedNodeNumber)
       this.isFetchingShutdownResponse = false
 
+      //TODO: error handling
       if(response === 'OK');
     },
     async powerUpSelectedNode() {
@@ -169,6 +174,7 @@ name: "nodes-management",
           this.selectedNodeNumber = index + 1
       }
     },
+    //initial table data based on /nodes REST call
     seedTable() {
       this.tableData = []
       for(let index = 0; index < this.availableNodesData.length; index++) {

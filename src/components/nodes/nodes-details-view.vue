@@ -23,6 +23,9 @@
 </template>
 
 <script>
+/*
+ * A info box displaying data specific to a selected node.
+ */
 export default {
 name: "nodes-details-view",
     props: {
@@ -36,6 +39,7 @@ name: "nodes-details-view",
     },
   methods: {
     viewClosed() {
+      //Fire when the message is closed.
       this.$emit("detailsClosed", "DetailsClosed");
     }
   }

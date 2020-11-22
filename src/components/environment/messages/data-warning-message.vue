@@ -14,6 +14,9 @@
 
 <script>
 import BaseButton from "@/components/base-components/base-button";
+/*
+ * A message which informs the user about environmental threshold values being exceeded.
+ */
 export default {
 name: "data-warning-message",
   components: {BaseButton},
@@ -27,9 +30,11 @@ name: "data-warning-message",
   },
   methods: {
     sendShutdownSignal() {
+      //Propagates panic signal.
       this.$emit("systemShutdown","SystemShutdown")
     },
     messageClosed() {
+      //Fire when the message is closed.
       this.$emit("panicClosed", "PanicClosed");
     }
   }

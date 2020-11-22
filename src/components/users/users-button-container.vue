@@ -12,7 +12,9 @@
 
 <script>
 import BaseButton from "@/components/base-components/base-button";
-
+/*
+ * Helper component meant  to hold buttons related to the users view.
+ */
 export default {
 name: "users-button-container",
     components: {BaseButton},
@@ -21,6 +23,8 @@ name: "users-button-container",
     },
     methods: {
       propagateButtonEvent(buttonLabel) {
+        // Fire when a button is clicked.
+        // @args The payload is the label of the button, for identification purposes.
         this.$emit("button-clicked", buttonLabel);
       }
     }

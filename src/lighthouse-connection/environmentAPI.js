@@ -2,6 +2,9 @@ import API from "@/lighthouse-connection/API";
 
 const resource = "/sensor_status";
 
+/*
+ * Environment API endpoint, extendable.
+ */
 export default {
     data() {
         return {
